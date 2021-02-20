@@ -21,6 +21,10 @@ class Word
 
     }
 
+    public function wordToGuess(): array {
+        return $this->wordToGuess;
+    }
+
     public function guessProgress(): array
     {
         return $this->guessProgress;
@@ -75,7 +79,7 @@ class Game
         $this->triesCount = 10;
     }
 
-    public function playGame()
+    public function playGame(): void
     {
         do {
             $this->drawBoard();
@@ -87,7 +91,7 @@ class Game
         $this->drawBoard();
         echo $this->word->correctGuess() ?
             "It is a win!" . PHP_EOL :
-            "Out of moves. Better luck next time!" . PHP_EOL;
+            "Out of moves. The correct answer is: " . implode("", $this->word->wordToGuess()) . PHP_EOL . "Better luck next time!" . PHP_EOL;
     }
 
     private function drawBoard(): void
