@@ -1,109 +1,151 @@
 <?php
 
-function displayBoard(array $board): array
+class Board
 {
-    echo PHP_EOL;
-    echo " {$board[0][0]} | {$board[0][1]} | {$board[0][2]} \n";
-    echo "---+---+---\n";
-    echo " {$board[1][0]} | {$board[1][1]} | {$board[1][2]} \n";
-    echo "---+---+---\n";
-    echo " {$board[2][0]} | {$board[2][1]} | {$board[2][2]} \n";
-    $nextMove = nextToMove($board) ? "X" : "O";
-    echo PHP_EOL . "'$nextMove' choose your location (row, column): ";
-    $board = validateMove($nextMove, $board);
-    return $board;
-}
+    private array $board = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]
+    ];
+    private string $moveValue = "X";
+    private string $winner = "-";
 
-function nextToMove(array $board): bool
-{
-    $freeCount = 0;
-    for ($i = 0; $i < count($board); ++$i) {
-        if (in_array(" ", $board[$i])) {
-            $freeCount += array_count_values($board[$i])[" "];
+    public function getBoard(int $value1, int $value2): string
+    {
+        return $this->board[$value1][$value2];
+    }
+
+    public function getMoveValue(): string
+    {
+        return $this->moveValue;
+    }
+
+    public function getWinner(): string
+    {
+        return $this->winner;
+    }
+
+    public function countEmptyCells(): int
+    {
+        return count(array_keys($this->board[0], " ")) +
+            count(array_keys($this->board[1], " ")) +
+            count(array_keys($this->board[2], " "));
+    }
+
+    public function updateBoard(int $input1, int $input2): void
+    {
+        $this->board[$input1][$input2] = $this->moveValue;
+        $this->calculateNextMoveValue();
+        $this->calculateWinner();
+    }
+
+    private function calculateNextMoveValue(): void
+    {
+        $this->moveValue === "X" ? $this->moveValue = "O" : $this->moveValue = "X";
+    }
+
+    private function calculateWinner(): void
+    {
+        // Horizontal
+        for ($i = 0; $i < count($this->board); ++$i) {
+            if (($this->board[$i][0] === $this->board[$i][1]) && ($this->board[$i][1] === $this->board[$i][2]) && $this->board[$i][0] !== " ") {
+                $this->winner = $this->board[$i][0];
+            }
+        }
+
+        // Vertical
+        for ($i = 0; $i < count($this->board); ++$i) {
+            if (($this->board[0][$i] === $this->board[1][$i]) && ($this->board[1][$i] === $this->board[2][$i]) && $this->board[0][$i] !== " ") {
+                $this->winner = $this->board[0][$i];
+            }
+        }
+
+        // Diagonal 1
+        if (($this->board[0][0] === $this->board[1][1]) && ($this->board[1][1] === $this->board[2][2]) && $this->board[0][0] !== " ") {
+            $this->winner = $this->board[0][0];
+        }
+
+        // Diagonal 2
+        if (($this->board[0][2] === $this->board[1][1]) && ($this->board[1][1] === $this->board[2][0]) && $this->board[0][2] !== " ") {
+            $this->winner = $this->board[0][2];
         }
     }
-    return $freeCount & 1;
 }
 
-function validateMove(string $nextMove, array $board): array
+
+class Game
 {
-    fscanf(STDIN, "%d %d", $value1, $value2);
-    if (validateInput(intval($value1), intval($value2), $board)) {
+    private Board $board;
+
+
+    function __construct()
+    {
+        $this->board = new Board();
+    }
+
+    public function playGame(): void
+    {
         do {
+            $this->drawBoard();
+            $this->makeMove();
+        } while ($this->board->getWinner() === "-" && $this->board->countEmptyCells() > 0);
+
+        // Finalize
+        $this->drawBoard();
+        echo $this->board->getWinner() !== "-" ?
+            PHP_EOL . "The winner is {$this->board->getWinner()}!" . PHP_EOL :
+            PHP_EOL . "The game is a tie." . PHP_EOL;
+    }
+
+    private function drawBoard(): void
+    {
+        echo PHP_EOL;
+        echo " {$this->board->getBoard(0, 0)} | {$this->board->getBoard(0, 1)} | {$this->board->getBoard(0, 2)} \n";
+        echo "---+---+---\n";
+        echo " {$this->board->getBoard(1, 0)} | {$this->board->getBoard(1, 1)} | {$this->board->getBoard(1, 2)} \n";
+        echo "---+---+---\n";
+        echo " {$this->board->getBoard(2, 0)} | {$this->board->getBoard(2, 1)} | {$this->board->getBoard(2, 2)} \n";
+    }
+
+    private function makeMove(): void
+    {
+        echo PHP_EOL . "'{$this->board->getMoveValue()}' choose your location (row, column): ";
+        fscanf(STDIN, "%d %d", $input1, $input2);
+
+        // This is needed for accidental "Enter" without value -> some fake integer assigned
+        // Otherwise will throw error on validateInput receiving null instead of integer
+        if (!(isset($input1)) || !(isset($input2))) {
+            $input1 = 5;
+            $input2 = 5;
+        }
+
+        while ($this->validateInput($input1, $input2)) {
             echo "This location is occupied or wrong values entered. Please choose different: ";
-            fscanf(STDIN, "%d %d", $value1, $value2);
-        } while (validateInput(intval($value1), intval($value2), $board));
-    }
-    $board[$value1][$value2] = $nextMove;
-    return $board;
-}
+            fscanf(STDIN, "%d %d", $input1, $input2);
 
-// Returns true, when everything is bad, for validateMove to run... while "everything is bad" === true
-// Returns false, when validation succeeds
-function validateInput(int $value1, int $value2, array $board): bool
-{
-    if ($value1 < 0 || $value1 > 2 || $value2 < 0 || $value2 > 2) {
-        return true;
-    }
-    if ($board[$value1][$value2] !== " ") {
-        return true;
-    }
-    return false;
-}
-
-
-function calculateWinner(array $board): string
-{
-    // Horizontal
-    for ($i = 0; $i < count($board); ++$i) {
-        if (($board[$i][0] === $board[$i][1]) && ($board[$i][1] === $board[$i][2]) && $board[$i][0] !== " ") {
-            return $board[$i][0];
+            // This is needed for accidental "Enter" without value -> some fake integer assigned
+            // Otherwise will throw error on validateInput receiving null instead of integer
+            if (!(isset($input1)) || !(isset($input2))) {
+                $input1 = 5;
+                $input2 = 5;
+            }
         }
+        $this->board->updateBoard($input1, $input2);
     }
 
-    // Vertical
-    for ($i = 0; $i < count($board); ++$i) {
-        if (($board[0][$i] === $board[1][$i]) && ($board[1][$i] === $board[2][$i]) && $board[0][$i] !== " ") {
-            return $board[0][$i];
+    // Returns true, when everything is bad, for validateMove to run... while "everything is bad" === true
+    // Returns false, when validation succeeds
+    private function validateInput(int $input1, int $input2): bool
+    {
+        if ($input1 < 0 || $input1 > 2 || $input2 < 0 || $input2 > 2) {
+            return true;
         }
+        if ($this->board->getBoard($input1, $input2) !== " ") {
+            return true;
+        }
+        return false;
     }
-
-    // Diagonal 1
-    if (($board[0][0] === $board[1][1]) && ($board[1][1] === $board[2][2]) && $board[0][0] !== " ") {
-        return $board[0][0];
-    }
-
-    // Diagonal 2
-    if (($board[0][2] === $board[1][1]) && ($board[1][1] === $board[2][0]) && $board[0][2] !== " ") {
-        return $board[0][2];
-    }
-
-    return "-";
 }
 
-// Gameplay
-$board = [
-    [" ", " ", " "],
-    [" ", " ", " "],
-    [" ", " ", " "]
-];
-$winner = "-";
-$movesLeft = 9;
-
-do {
-    $board = displayBoard($board);
-    $winner = calculateWinner($board);
-    $movesLeft--;
-} while ($winner === "-" && $movesLeft > 0);
-
-// Draw final view
-echo PHP_EOL;
-echo " {$board[0][0]} | {$board[0][1]} | {$board[0][2]} \n";
-echo "---+---+---\n";
-echo " {$board[1][0]} | {$board[1][1]} | {$board[1][2]} \n";
-echo "---+---+---\n";
-echo " {$board[2][0]} | {$board[2][1]} | {$board[2][2]} \n";
-echo PHP_EOL;
-
-// Announce outcome
-echo $winner !== "-" ? "The winner is $winner!" . PHP_EOL : "The game is a tie." . PHP_EOL;
+$game = new Game();
+$game->playGame();
