@@ -100,7 +100,7 @@ class Game
         echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-" . PHP_EOL;
         echo "Tries left: $this->triesCount" . PHP_EOL . PHP_EOL;
         echo "Word:	" . implode(" ", $this->word->guessProgress()) . PHP_EOL . PHP_EOL;
-        echo "Misses: " . implode(" ", $this->word->misses()) . PHP_EOL . PHP_EOL;
+        echo "Misses: " . implode("", $this->word->misses()) . PHP_EOL . PHP_EOL;
     }
 
     private function makeGuess(): void
