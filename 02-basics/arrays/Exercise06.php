@@ -90,8 +90,8 @@ class Game
         // Finalize
         $this->drawBoard();
         echo $this->word->correctGuess() ?
-            "It is a win!" . PHP_EOL :
-            "Out of moves. The correct answer is: " . implode("", $this->word->wordToGuess()) . PHP_EOL . "Better luck next time!" . PHP_EOL;
+            "YOU GOT IT!" . PHP_EOL . PHP_EOL :
+            "Out of moves. The correct answer is: " . implode("", $this->word->wordToGuess()) . PHP_EOL . "Better luck next time!" . PHP_EOL . PHP_EOL;
     }
 
     private function drawBoard(): void
@@ -117,5 +117,7 @@ class Game
     }
 }
 
-$game = new Game();
-$game->playGame();
+do {
+    $game = new Game();
+    $game->playGame();
+} while (readline("Play 'again' or 'quit'? ") === "again");
