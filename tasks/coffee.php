@@ -140,9 +140,9 @@ class Coffee
         return in_array($selection, $this->coffeeAvailableOptions);
     }
 
-    public function reducePriceToPay(int $coinValue): void
+    public function reducePriceToPay(int $coinIndex): void
     {
-        $this->priceToPay -= $coinValue;
+        $this->priceToPay -= $coinIndex;
     }
 
     public function isMoneyEnough(int $money): array
