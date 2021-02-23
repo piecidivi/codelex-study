@@ -264,9 +264,10 @@ do {
 
     $refund = array_count_values($wallet->refundChange(abs($coffee->getPriceToPay())));
     if (count($refund) > 0) {
-        echo "Returning in coins: " . drawCoins($refund) . "Total balance left: " .
-            number_format($wallet->getTotalMoney() / 100, 2, ".", "") . PHP_EOL . PHP_EOL;
+        echo "Returning in coins: " . drawCoins($refund);
     }
+    echo "Total balance left: " . number_format($wallet->getTotalMoney() / 100, 2, ".", "") . PHP_EOL;
+    echo "Coins in wallet: " . drawCoins($wallet->getCoins()) . PHP_EOL;
     echo "Please enjoy Your drink!" . PHP_EOL;
 
 } while (strtolower(readline("Would You like to select another drink ('y' - yes, 'n' - no)? ")[0]) === "y");
