@@ -44,56 +44,18 @@ class Wallet
         $this->totalMoney -= $coinIndex;
     }
 
-    public function refundChange(int $change): array
-    {
+    public function refundChange(int $change): array {
         $this->totalMoney += $change;
         $refundCoins = [];
-        while ($change > 0) {
-            switch (true) {
-                case $change >= 200:
-                    $this->coins[200]++;
-                    $change -= 200;
-                    $refundCoins[] = 200;
-                    break;
-                case $change >= 100:
-                    $this->coins[100]++;
-                    $change -= 100;
-                    $refundCoins[] = 100;
-                    break;
-                case $change >= 50:
-                    $this->coins[50]++;
-                    $change -= 50;
-                    $refundCoins[] = 50;
-                    break;
-                case $change >= 20:
-                    $this->coins[20]++;
-                    $change -= 20;
-                    $refundCoins[] = 20;
-                    break;
-                case $change >= 10:
-                    $this->coins[10]++;
-                    $change -= 10;
-                    $refundCoins[] = 10;
-                    break;
-                case $change >= 5:
-                    $this->coins[5]++;
-                    $change -= 5;
-                    $refundCoins[] = 5;
-                    break;
-                case $change >= 2:
-                    $this->coins[2]++;
-                    $change -= 2;
-                    $refundCoins[] = 2;
-                    break;
-                default:
-                    $this->coins[1]++;
-                    $change -= 1;
-                    $refundCoins[] = 1;
+        foreach ($this->coins as $coin => $amount) {
+            while ($change >= $coin) {
+                $this->coins[$coin]++;
+                $refundCoins[] = $coin;
+                $change -= $coin;
             }
         }
         return $refundCoins;
     }
-
 
 } // End of Wallet class
 /* END OF WALLET CLASS **********/
