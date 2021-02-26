@@ -70,7 +70,6 @@ try {
 
 $fuelGauge = new FuelGauge();
 while ($fuelGauge->tankStatus("fill")) {
-
     $fuelGauge->putFuel();
     echo "Filling fuel tank: {$fuelGauge->getFuelAmount()}" . PHP_EOL;
 }
@@ -80,7 +79,3 @@ while ($fuelGauge->tankStatus("drive")) {
     $odometer->drive($fuelGauge);
     echo "Current mileage: {$odometer->getMileage()}, amount of fuel: {$fuelGauge->getFuelAmount()}" . PHP_EOL;
 }
-
-
-
-
