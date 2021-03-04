@@ -18,17 +18,14 @@ $dogs->addDogs([
 
 
 // Add mothers and fathers (returns boolean for testing purposes)
-echo $dogs->addParent("Max", "Lady") ? "Parent added!\n" : "Parent not added!\n";
-echo $dogs->addParent("Max", "Rocky") ? "Parent added!\n" : "Parent not added!\n";
-echo PHP_EOL;
-echo $dogs->addParent("Coco", "Molly") ? "Parent added!\n" : "Parent not added!\n";
-echo $dogs->addParent("Coco", "Buster") ? "Parent added!\n" : "Parent not added!\n";
-echo PHP_EOL;
-echo $dogs->addParent("Rocky", "Molly") ? "Parent added!\n" : "Parent not added!\n";
-echo $dogs->addParent("Rocky", "Sam") ? "Parent added!\n" : "Parent not added!\n";
-echo PHP_EOL;
-echo $dogs->addParent("Buster", "Lady") ? "Parent added!\n" : "Parent not added!\n";
-echo $dogs->addParent("Buster", "Sparky") ? "Parent added!\n" : "Parent not added!\n";
+$dogs->addParent("Max", "Lady");
+$dogs->addParent("Max", "Rocky");
+$dogs->addParent("Coco", "Molly");
+$dogs->addParent("Coco", "Buster");
+$dogs->addParent("Rocky", "Molly");
+$dogs->addParent("Rocky", "Sam");
+$dogs->addParent("Buster", "Lady");
+$dogs->addParent("Buster", "Sparky");
 
 
 // Return fathers name

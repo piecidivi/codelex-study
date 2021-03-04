@@ -19,7 +19,7 @@ class DogsCollection
         $this->dogs[] = $dog;
     }
 
-    public function addParent(string $childName, string $parentName): bool
+    public function addParent(string $childName, string $parentName): void
     {
         foreach ($this->dogs as $child) {
             /** @var Dog $child */
@@ -28,12 +28,10 @@ class DogsCollection
                     /** @var Dog $parent */
                     if ($parent->getName() === $parentName) {
                         $child->setParent($parent);
-                        return true;
                     }
                 }
             }
         }
-        return false;
     }
 
     public function getFatherName(string $childName): string
