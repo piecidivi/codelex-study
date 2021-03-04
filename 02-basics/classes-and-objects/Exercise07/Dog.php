@@ -5,8 +5,10 @@ class Dog
 {
     private string $name;
     private string $sex;
-    private string $mother;
-    private string $father;
+    private Dog $mother;
+    private Dog $father;
+    const MALE = "male";
+    const FEMALE = "female";
 
     public function __construct(string $name, string $sex)
     {
@@ -26,17 +28,17 @@ class Dog
 
     public function getFatherName(): string
     {
-        return isset($this->father) ? $this->father : "Unknown";
+        return isset($this->father) ? $this->father->getName() : "Unknown";
     }
 
     public function getMotherName(): string
     {
-        return isset($this->mother) ? $this->mother : "Unknown";
+        return isset($this->mother) ? $this->mother->getName() : "Unknown";
     }
 
-    public function setParent(string $name, string $sex): void
+    public function setParent(Dog $dog): void
     {
-        $sex === "female" ? $this->mother = $name : $this->father = $name;
+        ($dog->getSex() === "female") ? ($this->mother = $dog) : ($this->father = $dog);
     }
 
 }

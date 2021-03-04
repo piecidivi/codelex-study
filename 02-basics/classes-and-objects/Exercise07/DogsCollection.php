@@ -27,7 +27,7 @@ class DogsCollection
                 foreach ($this->dogs as $parent) {
                     /** @var Dog $parent */
                     if ($parent->getName() === $parentName) {
-                        $child->setParent($parent->getName(), $parent->getSex());
+                        $child->setParent($parent);
                         return true;
                     }
                 }

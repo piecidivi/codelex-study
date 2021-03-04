@@ -6,18 +6,18 @@ require_once  "DogsCollection.php";
 // Create dogs
 $dogs = new DogsCollection();
 $dogs->addDogs([
-    new Dog("Max", "male"),
-    new Dog("Rocky", "male"),
-    new Dog("Sparky", "male"),
-    new Dog("Buster", "male"),
-    new Dog("Sam", "male"),
-    new Dog("Lady", "female"),
-    new Dog("Molly", "female"),
-    new Dog("Coco", "female")
+    new Dog("Max", Dog::MALE),
+    new Dog("Rocky", Dog::MALE),
+    new Dog("Sparky", Dog::MALE),
+    new Dog("Buster", Dog::MALE),
+    new Dog("Sam", Dog::MALE),
+    new Dog("Lady", Dog::FEMALE),
+    new Dog("Molly", Dog::FEMALE),
+    new Dog("Coco", Dog::FEMALE)
 ]);
 
 
-// Add mothers and fathers
+// Add mothers and fathers (returns boolean for testing purposes)
 echo $dogs->addParent("Max", "Lady") ? "Parent added!\n" : "Parent not added!\n";
 echo $dogs->addParent("Max", "Rocky") ? "Parent added!\n" : "Parent not added!\n";
 echo PHP_EOL;
