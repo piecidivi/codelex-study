@@ -1,5 +1,6 @@
 <?php
 
+
 class Survey
 {
     private int $surveyedTotal;
@@ -11,9 +12,8 @@ class Survey
         $this->setSurveyValues($surveyedTotal, $energyDrinksPercent, $citrusDrinksPercent);
     }
 
-    // Uzdevumā prasīts ir "Logic Exception", bet tas ir tādam gadījumam, ja kodā ir loģiska kļūda.
-    // Dotajā uzdevumā pēc tām prasībām un piedāvātā sākuma koda nekādu loģisku kļūdu izdomāt nesanāk.
-    // Varētu kaut ko izdomāt, ja kaut kur pa vidu dabūtu nulli, ar kuru dalītu pakārtotajā metodē, bet te jau ir tikai jāreizina.
+    // Required "Logic Exception". If we had to divide by zero in sub-method, then maybe we could find some "Logic Exception".
+    // However, here we only have to multiply.
     private function setSurveyValues(int $surveyedTotal, float $energyDrinksPercent, float $citrusDrinksPercent): void
     {
         if ($surveyedTotal < 0 || $energyDrinksPercent < 0 || $citrusDrinksPercent < 0) {
@@ -39,18 +39,4 @@ class Survey
         return intval($this->surveyedTotal * $this->energyDrinksPercent * $this->citrusDrinksPercent);
     }
 
-}
-
-// Create instance
-try {
-    $surveyed = new Survey(12467, 0.14, 0.64);
-} catch (InvalidArgumentException $exception) {
-    echo $exception->getMessage();
-}
-
-// Retrieve data
-if (isset($surveyed)) {
-    echo "Total number of people surveyed: {$surveyed->getSurveyed()}.\n";
-    echo "Approximately {$surveyed->getEnergyDrinksRate()} bought at least one energy drink.\n";
-    echo "{$surveyed->getCitrusDrinksRate()} of those prefer flavored energy drinks.\n";
 }
