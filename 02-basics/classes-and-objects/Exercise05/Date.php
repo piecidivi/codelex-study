@@ -1,5 +1,6 @@
 <?php
 
+
 class Date
 {
     private int $day;
@@ -11,6 +12,7 @@ class Date
         $this->setDate($day, $month, $year);
     }
 
+    // This method was required in task details
     public function displayDate(): string
     {
         $str = "Saved date in form dd/mm/yyyy is ";
@@ -69,48 +71,4 @@ class Date
     {
         return $year % 4 === 0 && $year % 100 !== 0 ? true : $year % 400 === 0;
     }
-} // END OF DATE CLASS
-
-// Function to validate input before creating class instance
-function validateInput(string $requirement): string
-{
-    do {
-        $input = (readline("Please enter positive number other than 0 for $requirement: "));
-    } while (!is_int($input) && (int)$input < 1);
-    return $input;
 }
-
-// Insert values
-$day = intval(validateInput("day"));
-$month = intval(validateInput("month"));
-$year = intval(validateInput("year"));
-
-// Create object
-try {
-    $date = new Date($day, $month, $year);
-} catch (InvalidArgumentException $exception) {
-    echo $exception->getMessage();
-}
-
-// Display date saved in object
-if (isset($date)) echo $date->displayDate();
-
-
-if (isset($date)) {
-    // Change date of object
-    echo "Change date:\n";
-    $day = intval(validateInput("day"));
-    $month = intval(validateInput("month"));
-    $year = intval(validateInput("year"));
-
-    try {
-        $date->setDate($day, $month, $year);
-    } catch (InvalidArgumentException $exception) {
-        echo $exception->getMessage();
-    }
-
-
-    // Display date saved in object
-    echo $date->displayDate();
-}
-
