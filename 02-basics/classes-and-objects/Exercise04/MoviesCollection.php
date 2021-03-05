@@ -25,5 +25,4 @@ class MoviesCollection
     {
         $this->movies[] = $movie;
     }
-
 }

@@ -40,7 +40,6 @@ if (isset($date)) {
         echo $exception->getMessage();
     }
 
-
     // Display date saved in object
     echo $date->displayDate();
 }

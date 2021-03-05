@@ -10,7 +10,7 @@ class SavingsAccount
     private int $interest = 0;
 
     // Input floats are multiplied with 100, and saved and operated as integers.
-    // Interest rate is integer 5, not 0.05, defined it task requirements.
+    // Interest rate is integer 5, not 0.05, defined in task requirements.
     public function __construct(float $balance, int $annualInterestRate)
     {
         $this->balance = $balance * 100;

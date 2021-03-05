@@ -40,5 +40,4 @@ class Dog
     {
         ($dog->getSex() === "female") ? ($this->mother = $dog) : ($this->father = $dog);
     }
-
 }

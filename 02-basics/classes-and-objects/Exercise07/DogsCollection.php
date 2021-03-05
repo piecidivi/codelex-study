@@ -11,7 +11,6 @@ class DogsCollection
         foreach ($dogs as $dog) {
             $this->add($dog);
         }
-
     }
 
     private function add(Dog $dog): void
@@ -60,5 +59,4 @@ class DogsCollection
         }
         return false;
     }
-
 }

@@ -38,5 +38,4 @@ class Survey
     {
         return intval($this->surveyedTotal * $this->energyDrinksPercent * $this->citrusDrinksPercent);
     }
-
 }

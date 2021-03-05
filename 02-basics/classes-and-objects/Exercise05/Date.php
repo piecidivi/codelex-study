@@ -53,7 +53,6 @@ class Date
 
     private function calculateMonthLength(int $month, int $year): int
     {
-        $dayCount = 0;
         switch (true) {
             case $month === 2:
                 $this->calculateLeapYear($year) ? $dayCount = 29 : $dayCount = 28;

@@ -27,5 +27,4 @@ class Movie
     {
         return $this->rating;
     }
-
 }

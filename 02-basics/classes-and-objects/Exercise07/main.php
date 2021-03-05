@@ -17,7 +17,7 @@ $dogs->addDogs([
 ]);
 
 
-// Add mothers and fathers (returns boolean for testing purposes)
+// Add parents
 $dogs->addParent("Max", "Lady");
 $dogs->addParent("Max", "Rocky");
 $dogs->addParent("Coco", "Molly");
@@ -29,6 +29,7 @@ $dogs->addParent("Buster", "Sparky");
 
 
 // Return fathers name
+echo PHP_EOL;
 echo $dogs->getFatherName("Coco");      // Buster
 echo $dogs->getFatherName("Sparky");    // Unknown
 echo $dogs->getFatherName("Abc");       // Abc is not in the dogs list
