@@ -10,6 +10,21 @@ class VideoStore
         return $this->videos;
     }
 
+    public function getAvailableForRent(): array
+    {
+        return array_filter($this->videos, function (Video $video): bool {
+            return $video->availableInStore();
+        });
+    }
+
+    // Only video that is rented out can be returned to store
+    public function getRentedOut(): array
+    {
+        return array_filter($this->videos, function (Video $video): bool {
+            return !$video->availableInStore();
+        });
+    }
+
     public function addVideo(Video $video): void
     {
         $this->videos[] = $video;
@@ -30,5 +45,4 @@ class VideoStore
             if ($video->getTitle() === $title) $video->returnToStore($rating);
         }
     }
-
 }
