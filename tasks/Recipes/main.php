@@ -24,59 +24,58 @@ require_once "UnitType.php";
 
 // Initialize dictionary
 $dictionary = new Dictionary();
-$dictionary->registerUnit("gram", 2, 1);
-$dictionary->registerUnit("kilogram", 2, 1000);
-$dictionary->registerUnit("milliliter", 3, 1);
-$dictionary->registerUnit("liter", 3, 1000);
+$dictionary->registerUnit("grams", 2, 1);
+$dictionary->registerUnit("milliliters", 3, 1);
 $dictionary->registerUnit("piece", 1, 1);
 $dictionary->registerUnit("teaspoon", 3, 5);
 $dictionary->registerUnit("tablespoon", 3, 15);
 $dictionary->registerUnit("glass", 3, 250);
 
-foreach ($dictionary->getUnits() as $unit) {
-    /** @var UnitType $unit */
-    echo $unit->getName() . ", " . $unit->getType() . ", " . $unit->getAmount() . PHP_EOL;
-}
+// Unit list check === all good
+// foreach ($dictionary->getUnits() as $unit) {
+   // /** @var UnitType $unit */
+    //echo $unit->getName() . ", " . $unit->getType() . ", " . $unit->getAmount() . PHP_EOL;
+// }
 
 
-/*
+
 do {
     $choice = menuInput(View::mainMenu(), 0, 2);
 
+    // Play with Recipes
     if ($choice === 1) {
-
         $manageRecipes = menuInput(View::manageRecipes(), 0, 3);
         while ($manageRecipes !== 0) {
             switch ($manageRecipes) {
                 case 1:
                     // Add recipe
                     do {
-                        $dictionary = new Dictionary();
-                        $addIngredient = menuInput(View::addRecipe($dictionary),
-                            0, count($dictionary->getIngredientsKeys()) + 2);
+                        $addIngredient = (menuInput(View::addRecipe($dictionary),
+                            0, count($dictionary->getIngredients()) + 2) - 1);   // + 1 inside for iterator; -1 to match selection
 
-                        // Add new item
-                        if ($addIngredient === 1) {
+                        // Add new item - number will be even with count after -1, because all array elements will be smaller than count
+                        if ($addIngredient === count($dictionary->getIngredients())) {
                             // Ask for name
                             $newIngredientName = readline("Please enter new ingredient name: ");
                             // Check to avoid duplicate
-                            if (in_array(strtolower(trim($newIngredientName)), $dictionary->getIngredientsKeys())) {
+                            if ($dictionary->checkIngredientRegistered(strtolower(trim($newIngredientName)))) {
                                 echo "\nThis ingredient has already been registered in system.";
                                 continue;
                             } else {
                                 $newIngredientClass = menuInput(View::chooseClass(), 1, 2);
-                                $ingredientAmount = menuAmount();
+                                $newItemUnit = (menuInput(View::newItemUnit($dictionary), 1, count($dictionary->getUnits()) + 1) - 1);
+                                $newItemAmount = menuAmount();
+                                // Now we have to save new ingredient!!!
                             }
-
-                            // Choose class
 
                         }
 
                         // Add existing
-                        if ($addIngredient > 1) {
-
+                        if ($addIngredient < count($dictionary->getIngredients())) {
+                            // Do something
+                            $a = 1;
                         }
-                    } while ($addIngredient !== 0);
+                    } while ($addIngredient !== $dictionary->getIngredients() + 2);
                     break;
                 case 2:
                     // Modify recipe
@@ -88,10 +87,10 @@ do {
         }
     }
 
+    // Play with Basket
     if ($choice === 2) {
         $createBasket = menuInput(View::createBasket(), 0, 1);  // Adjust numbers, when menu completed
     }
 
 
 } while ($choice !== 0);
-*/

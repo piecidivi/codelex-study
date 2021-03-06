@@ -10,8 +10,10 @@ function menuInput(string $menu, int $lowerBoundary, int $upperBoundary): int {
     return $choice;
 }
 
-/*
+
 function menuAmount(): int {
-    $amount = intval(trim(readline("Please set amount of item (pieces, grams, or milliliters")))
+    do {
+        $amount = intval(trim(readline("Please set amount of item in by chosen unit: ")));
+    } while ($amount < 1);
+    return $amount;
 }
-*/

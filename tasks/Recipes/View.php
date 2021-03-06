@@ -16,12 +16,25 @@ class View
     }
 
     public static function addRecipe(Dictionary $dictionary): string {
-        $keys = $dictionary->getIngredientsKeys();
+        $ingredients = $dictionary->getIngredients();
+        $iterator = 0;
         $str = " Add items to recipe";
         $str .= "\n--------------------\n";
-        $str .= " [0] Exit; [1] New item\n";
-        for ($i = 2; $i < count($keys) + 2; ++$i) {
-            $str .= " [" . $i . "] {$keys[$i]}\n";
+        for ($i = 0; $i < count($ingredients); ++$i) {
+            $str .= " [" . ($i + 1) . "] {$ingredients[$i]}\n";
+            $iterator = $i;
+        }
+        $str .= " [" . ($iterator + 1) . "] New Item\n";
+        $str .= " [" . ($iterator + 1) . "] Exit\n";
+        return $str;
+    }
+
+    public static function newItemUnit(Dictionary $dictionary): string {
+        $units = $dictionary->getUnits();
+        $str = " Choose new item unit";
+        $str .= "\n---------------------\n";
+        for ($i = 0; $i < count($units); ++$i) {
+            $str .= " [" . ($i + 1). "] {$units[$i]}\n";
         }
         return $str;
     }
