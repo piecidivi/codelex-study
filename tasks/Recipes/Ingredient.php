@@ -4,20 +4,15 @@
 abstract class Ingredient
 {
     protected string $name;
+    protected string $amountType;
     protected int $amount;
 
-    public function __construct(string $name, string $type, float $amount) {
+    public function __construct(string $name, string $amountType, int $amount) {
         $this->name = $name;
-        $this->calculateInitialAmount($type, $amount);
+        $this->amountType = $amountType;
+        $this->amount = $amount;
     }
 
-    private function calculateInitialAmount(string $type, float $amount): void {
-        if ($type === "1") {
-            $this->amount = intval($amount);
-        } else {
-            $this->amount = intval($amount * 1000);
-        }
-    }
 
     public function getName(): string {
         return $this->name;
@@ -26,4 +21,10 @@ abstract class Ingredient
     public function getAmount(): int {
         return $this->amount;
     }
+
+    // return property to set
+    public function checkIfSet(): string {
+        return array_search(null,get_class_vars(get_class($this)));
+    }
+
 }
