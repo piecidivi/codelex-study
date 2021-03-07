@@ -1,18 +1,28 @@
 <?php
 
-require_once "Typification.php";
 
-class UnitType extends Typification
+class UnitType
 {
+    private string $name;
+    private string $type;
     private string $amount;
     const COUNT = "count";
     const WEIGHT = "weight";
     const VOLUME = "volume";
 
+
     public function __construct(string $name, int $type, int $amount) {
         $this->name = $name;
         $this->setType($type);
         $this->setAmount($amount);
+    }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function getType(): string {
+        return $this->type;
     }
 
     public function getAmount(): int {

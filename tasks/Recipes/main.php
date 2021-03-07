@@ -8,7 +8,6 @@ require_once "Recipe.php";
 require_once "RecipesCollection.php";
 require_once "View.php";
 require_once "appControl.php";
-require_once "IngredientType.php";
 require_once "UnitType.php";
 
 // Application
@@ -40,3 +39,8 @@ registerIngredients($dictionary);
 //    /** @var IngredientType $ingredientType */
 //    echo "{$ingredientType->getName()}, {$ingredientType->getType()}\n";
 //}
+
+// Create 1 Recipe
+$carrotSaladRecipe = new Recipe("Carrot salad");
+$ingredientClass = $dictionary->
+$carrotSaladRecipe->addIngredient();

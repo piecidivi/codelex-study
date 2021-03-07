@@ -3,8 +3,10 @@
 
 class Dictionary
 {
-    private array $ingredientTypes = [];
+    private array $ingredientTypes = [];    // Associative array: "ingredient name" => "class name"
     private array $unitTypes = [];
+    const NUMERABLE = "Numerable";
+    const POURABLE = "Pourable";
 
     public function getUnitTypes(): array {
         return $this->unitTypes;
@@ -19,14 +21,17 @@ class Dictionary
         if ($this->checkIngredientTypeRegistered($name)) {
             return;
         }
-        $this->ingredientTypes[] = new IngredientType($name, $type);
+        if ($type === 1) {
+            $this->ingredientTypes[$name] = self::NUMERABLE;
+        }
+        else if ($type === 2) {
+            $this->ingredientTypes[$name] = self::POURABLE;
+        }
     }
 
     // To avoid duplicates
     public function checkIngredientTypeRegistered(string $name): bool {
-        return count(array_filter($this->ingredientTypes, function(IngredientType $ingredientType) use ($name): bool {
-            return $ingredientType->getName() === $name;
-        })) > 0;
+        return array_key_exists($name, $this->ingredientTypes);
     }
 
     // Check duplicates inside, and silently return empty if found one
