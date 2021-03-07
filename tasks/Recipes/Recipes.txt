@@ -1,15 +1,16 @@
+Pinch is 2ml.
+
 Carrot salad
 -------------------------
-300g chicken;
-350g corn;
-200g carrot;
-2pcs garlic;
-60g raisins;
-2tsp orange juice;
-1tsp lemon juice;
-1tsp honey;
-3tblsp cream;
-2pi salt.
+300g chicken;   2000 g/unit
+350g corn;      2 g/unit
+200g carrot;    60 g/unit
+2pcs garlic;    5 g/unit
+2tsp orange juice;  1.01g/ml
+1tsp lemon juice;   1.03g/ml
+1tsp honey;         1.42g/ml
+3tblsp cream;       1.035g/ml
+2pi salt.           2.16g/ml
 
 Spicy salad
 -----------------

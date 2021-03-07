@@ -4,7 +4,7 @@
 class Dictionary
 {
     private array $ingredientTypes = [];    // Associative array: "ingredient name" => "class name"
-    private array $unitTypes = [];
+    private array $unitTypes = [];          // Associative array: "unit type" => amount
     const NUMERABLE = "Numerable";
     const POURABLE = "Pourable";
 
@@ -35,17 +35,15 @@ class Dictionary
     }
 
     // Check duplicates inside, and silently return empty if found one
-    public function registerUnitType(string $name, int $type, int $amount): void {
+    public function registerUnitType(string $name, int $amount): void {
         if ($this->checkUnitTypeRegistered($name)) {
             return;
         }
-        $this->unitTypes[] = new UnitType($name, $type, $amount);
+        $this->unitTypes[$name] = $amount;
     }
 
     // To avoid duplicates
     private function checkUnitTypeRegistered(string $name): bool {
-        return count(array_filter($this->unitTypes, function(UnitType $unitType) use ($name): bool {
-            return $unitType->getName() === $name;
-        })) > 0;
+        return array_key_exists($name, $this->unitTypes);
     }
 }

@@ -13,7 +13,7 @@ class RecipesCollection
         }
     }
 
-    private function addRecipe(Recipe $recipe): void
+    private function addRecipe(IngredientsCollection $recipe): void
     {
         $this->recipes[] = $recipe;
     }

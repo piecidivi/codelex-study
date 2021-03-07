@@ -1,36 +1,16 @@
 <?php
 
-require_once "Dictionary.php";
-
-// UI functionality
-function menuInput(string $menu, int $lowerBoundary, int $upperBoundary): int {
-    echo $menu;
-    $choice = intval(trim(readline("Your choice: ")));
-    while ($choice < $lowerBoundary || $choice > $upperBoundary) {
-        $choice = intval(trim(readline("Wrong selection. Please repeat: ")));
-    }
-    return $choice;
-}
-
-
-function menuAmount(): int {
-    do {
-        $amount = intval(trim(readline("Please set amount of item in by chosen unit: ")));
-    } while ($amount < 1);
-    return $amount;
-}
-
 // Automatic procedures
 
 // Register Unit Types: 1 - pieces, 2 - weight, 3 - volume
 function registerUnits(Dictionary $dictionary): void {
-    $dictionary->registerUnitType("pcs", 1, 1);         // pcs          (pieces, type 1)
-    $dictionary->registerUnitType("g", 2, 1);           // grams        (weight, type 2)
-    $dictionary->registerUnitType("ml", 3, 1);          // milliliters  (volume, type 3)
-    $dictionary->registerUnitType("pi", 3, 1);          // pinch        (volume, type 3)
-    $dictionary->registerUnitType("tsp", 3, 5);         // teaspoon     (volume, type 3)
-    $dictionary->registerUnitType("tblsp", 3, 15);      // tablespoon   (volume, type 3)
-    $dictionary->registerUnitType("glass", 3, 250);     // glass        (volume, type 3)
+    $dictionary->registerUnitType("piece", 1);         // pcs          (pieces, type 1)
+    $dictionary->registerUnitType("gram", 1);          // grams        (weight, type 2)
+    $dictionary->registerUnitType("ml", 1);            // milliliters  (volume, type 3)
+    $dictionary->registerUnitType("pinch", 2);         // pinch        (volume, type 3)
+    $dictionary->registerUnitType("teaspoon", 5);      // teaspoon     (volume, type 3)
+    $dictionary->registerUnitType("tablespoon", 15);   // tablespoon   (volume, type 3)
+    $dictionary->registerUnitType("glass", 250);       // glass        (volume, type 3)
 }
 
 // Register Ingredient Types: 1 - Numerable, 2 - Pourable
@@ -38,8 +18,7 @@ function registerIngredients(Dictionary $dictionary): void {
     $dictionary->registerIngredientType("chicken", 1);
     $dictionary->registerIngredientType("corn", 1);
     $dictionary->registerIngredientType("carrot", 1);
-    $dictionary->registerIngredientType("garlic", 2);
-    $dictionary->registerIngredientType("raisins", 2);
+    $dictionary->registerIngredientType("garlic", 1);
     $dictionary->registerIngredientType("orange juice", 2);
     $dictionary->registerIngredientType("lemon juice", 2);
     $dictionary->registerIngredientType("honey", 2);
