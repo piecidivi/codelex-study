@@ -3,5 +3,18 @@
 
 class RecipesCollection
 {
+    private array $recipes = [];
 
+
+    public function addRecipes(array $recipes): void
+    {
+        foreach ($recipes as $recipe) {
+            $this->addRecipe($recipe);
+        }
+    }
+
+    private function addRecipe(Recipe $recipe): void
+    {
+        $this->recipes[] = $recipe;
+    }
 }

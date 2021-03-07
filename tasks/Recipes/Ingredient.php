@@ -4,13 +4,19 @@
 abstract class Ingredient
 {
     protected string $name;
-    protected string $amountType;
+    protected string $unitType;
     protected int $amount;
+    protected int $variable;
 
-    public function __construct(string $name, string $amountType, int $amount) {
+    public function __construct(string $name, string $unitType, int $amount, ?int $variable) {
         $this->name = $name;
-        $this->amountType = $amountType;
+        $this->unitType = $unitType;
         $this->amount = $amount;
+
+        // Will be set for recipes ingredients. Will not be used for basket ingredients.
+        if (isset($variable)) {
+            $this->variable = $variable;
+        }
     }
 
 
@@ -20,11 +26,6 @@ abstract class Ingredient
 
     public function getAmount(): int {
         return $this->amount;
-    }
-
-    // return property to set
-    public function checkIfSet(): string {
-        return array_search(null,get_class_vars(get_class($this)));
     }
 
 }
