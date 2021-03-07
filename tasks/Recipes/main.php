@@ -7,7 +7,7 @@ require_once "Dictionary.php";
 require_once "Recipe.php";
 require_once "RecipesCollection.php";
 require_once "View.php";
-require_once "uiControl.php";
+require_once "appControl.php";
 require_once "IngredientType.php";
 require_once "UnitType.php";
 
@@ -19,20 +19,24 @@ require_once "UnitType.php";
 
 // Initialize dictionary
 $dictionary = new Dictionary();
-$dictionary->registerUnitType("pcs", 1, 1);         // pcs          (pieces, type 1)
-$dictionary->registerUnitType("g", 2, 1);           // grams        (weight, type 2)
-$dictionary->registerUnitType("ml", 3, 1);          // milliliters  (volume, type 3)
-$dictionary->registerUnitType("pi", 3, 1);          // pinch        (volume, type 3)
-$dictionary->registerUnitType("tsp", 3, 5);         // teaspoon     (volume, type 3)
-$dictionary->registerUnitType("tblsp", 3, 15);      // tablespoon   (volume, type 3)
-$dictionary->registerUnitType("glass", 3, 250);     // glass        (volume, type 3)
 
-// Unit list check === all good
-// foreach ($dictionary->getUnits() as $unit) {
-   // /** @var UnitType $unit */
-    //echo $unit->getName() . ", " . $unit->getType() . ", " . $unit->getAmount() . PHP_EOL;
+// Register Units
+registerUnits($dictionary);
+
+// Unit Type list check === all good
+// foreach ($dictionary->getUnitTypes() as $unitType) {
+   // /** @var UnitType $unitType */
+   //  echo "{$unitType->getName()}, {$unitType->getType()}, {$unitType->getAmount()}\n";
 // }
 
 
 // !!! Anything in pieces is saved in as many elements, and counted by type always before output.
 
+// Register Ingredient Types: 1 - Numerable, 2 - Pourable
+registerIngredients($dictionary);
+
+// Ingredient Type list check === all good
+// foreach ($dictionary->getIngredientTypes() as $ingredientType) {
+//    /** @var IngredientType $ingredientType */
+//    echo "{$ingredientType->getName()}, {$ingredientType->getType()}\n";
+//}

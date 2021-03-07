@@ -6,12 +6,12 @@ class Dictionary
     private array $ingredientTypes = [];
     private array $unitTypes = [];
 
-    public function getUnits(): array {
+    public function getUnitTypes(): array {
         return $this->unitTypes;
     }
 
-    public function getIngredients(): array {
-        return $this->getIngredients();
+    public function getIngredientTypes(): array {
+        return $this->ingredientTypes;
     }
 
     // Check duplicates inside and silently return empty if found one
