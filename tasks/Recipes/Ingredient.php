@@ -8,7 +8,8 @@ abstract class Ingredient
     protected int $amount;
     protected float $variable;
 
-    public function __construct(string $name, string $unitType, int $amount, ?float $variable) {
+    public function __construct(string $name, string $unitType, int $amount, float $variable = null)
+    {
         $this->name = $name;
         $this->unitType = $unitType;
         $this->amount = $amount;
@@ -19,20 +20,23 @@ abstract class Ingredient
         }
     }
 
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    public function getAmount(): int {
+    public function getAmount(): int
+    {
         return $this->amount;
     }
 
-    public function getUnitType(): string {
+    public function getUnitType(): string
+    {
         return $this->unitType;
     }
 
-    protected function getVariable(): float {
+    protected function getVariable(): float
+    {
         return $this->variable;
     }
-
 }
