@@ -3,5 +3,5 @@
 
 interface Trade
 {
-    public function obtainFlowers(): array;
+    public function pay(Shop $shop): bool;
 }
