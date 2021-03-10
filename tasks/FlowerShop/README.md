@@ -1,3 +1,3 @@
 Flower Shop
 
-When ready, will have some description here!
+Flower Shop obtains flowers from wholesalers, and sells to people. Main file menu is self-explanatory on load.

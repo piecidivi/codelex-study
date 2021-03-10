@@ -4,42 +4,21 @@
 class Application
 {
     // Initialize wholesalers
-    public function initSilly(): object {
-        $silly = new SillyWarehouse("Silly Warehouse");
-        $silly->addFlowers([
-            new Flower("rose", 100),
-            new Flower("tulip", 50),
-            new Flower("carnation", 50),
-            new Flower("dahlia", 50)
-        ]);
-        return $silly;
+    public function initWholesaler(string $name, Shop $shop): object
+    {
+        $flowerNames = $shop->getFlowerNames();
+        $seller = new Warehouse($name);
+        while (count($flowerNames) > 3) {
+            $flowerName = array_rand($flowerNames);
+            $seller->addOneFlower(new Flower($flowerNames[$flowerName], mt_rand(50, 100)));
+            unset($flowerNames[$flowerName]);
+        }
+        return $seller;
     }
-
-    public function initRegular(): object {
-        $regular = new RegularWarehouse("Regular Warehouse");
-        $regular->addFlowers([
-            new Flower("gerber", 94),
-            new Flower("daisy", 56),
-            new Flower("narcissus", 75),
-            new Flower("aster", 280)
-        ]);
-        return $regular;
-    }
-
-    public function initHustler(): object {
-        $hustler = new HustleWarehouse("Hustler Warehouse");
-        $hustler->addFlowers([
-            new Flower("rose", 77),
-            new Flower("dahlia", 152),
-            new Flower("gerber", 145),
-            new Flower("daisy", 188)
-        ]);
-        return $hustler;
-    }
-
 
     // Money is multiplied by 100 already here (before accessing other objects)
-    public function initShop(): object {
+    public function initShop(): object
+    {
         $shop = new Shop("Flowers Round The Corner - F.R.T.C.", 100000);
         $shop->addFlowers([
             new Flower("rose", 0, 500),
@@ -54,5 +33,45 @@ class Application
         return $shop;
     }
 
+    public function buyWholesale(int $wholesaler, Shop $shop): bool
+    {
+        switch ($wholesaler) {
+            case 1:
+                $game = new SillyTrade;
+                break;
+            case 2:
+                $game = new RegularTrade;
+                break;
+            default:
+                $game = new HustleTrade;
+                break;
+        }
+        return ($this->executeTrade($game, $shop));
+    }
 
+
+    private function executeTrade(Trade $trade, Shop $shop): bool
+    {
+        return $trade->pay($shop);
+    }
+
+
+    public function inputValidation(int $lowerSelection, int $upperSelection): int
+    {
+        $menuSelection = intval(trim(readline("Please choose: ")));
+        while ($menuSelection < $lowerSelection || $menuSelection > $upperSelection) {
+            $menuSelection = intval(trim(readline("Wrong selection. Please repeat: ")));
+        }
+        return $menuSelection;
+    }
+
+    public function calculateCheckout(array $amount, array $price, bool $discount): array
+    {
+        $totalPay = $total = 0;
+        for ($i = 0; $i < count($amount); ++$i) {
+            $totalPay += ($amount[$i] * $price[$i]);
+        }
+        $total = $discount ? ($totalPay - ($totalPay * 0.2)) : $totalPay;
+        return [$totalPay, $total];
+    }
 }

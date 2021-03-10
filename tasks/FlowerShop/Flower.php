@@ -12,7 +12,7 @@ class Flower
     {
         $this->name = $name;
         $this->amount = $amount;
-        $this->$price = $price;
+        $this->price = $price;
     }
 
     public function getName(): string
@@ -20,12 +20,23 @@ class Flower
         return $this->name;
     }
 
-    public function getAmount(): int {
+    public function getAmount(): int
+    {
         return $this->amount;
     }
 
     public function getPrice(): int
     {
         return $this->price;
+    }
+
+    public function addAmount(int $amount): void
+    {
+        $this->amount += $amount;
+    }
+
+    public function deductAmount(int $amount): void
+    {
+        $this->amount -= $amount;
     }
 }
