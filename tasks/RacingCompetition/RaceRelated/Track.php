@@ -10,4 +10,12 @@ class Track
         $this->name = $name;
         $this->length = $length;
     }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    public function getLength(): int {
+        return $this->length;
+    }
 }

@@ -3,7 +3,7 @@
 
 class Human extends Mobile
 {
-    public function getID(): int
+    public function getID(): string
     {
         return $this->id;
     }
