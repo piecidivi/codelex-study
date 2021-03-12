@@ -54,13 +54,11 @@ sleep(1);
 echo "GO!\n";
 
 do {
-
     $participants = $competition->competition();
     usleep(500000);
     system("clear");
     echo PHP_EOL . Render::drawRace($participants->getParticipants(),
             $track->getLength(), $track->getTrackOffsetStart());
-
 } while (count($participants->getActive()) > 0);
 
 echo "Competition is over!\n";
