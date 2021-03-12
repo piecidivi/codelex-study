@@ -5,17 +5,19 @@ class ParticipantCollection
 {
     private array $participants = [];
 
-    public function getParticipants(): array {
+    public function getParticipants(): array
+    {
         return $this->participants;
     }
 
-    public function addParticipants(array $participants): void {
-        foreach ($participants as $participant) {
-            $this->addOneParticipant($participant);
-        }
+    public function getActive(): array
+    {
+        return array_filter($this->participants,
+            fn(Participant $participant) => $participant->getMotionState());
     }
 
-    public function addOneParticipant(Participant $participant): void {
+    public function addOneParticipant(Participant $participant): void
+    {
         $this->participants[] = $participant;
     }
 }

@@ -10,17 +10,18 @@ abstract class Mobile implements Racer
     protected int $maxSpeed;
     protected int $crashRate;
 
-    public function __construct(string $name,  int $minSpeed, int $maxSpeed, int $crashRate) {
+    public function __construct(string $name, int $minSpeed, int $maxSpeed, int $crashRate)
+    {
         $this->id = "M" . self::$counter++;
         $this->name = $name;
         $this->setSpeedLimits($minSpeed, $maxSpeed);
         $this->setCrashRate($crashRate);
-
     }
 
     // Protection for ambiguous values etc.
-    protected function setCrashRate(int $crashRate): void {
-        switch(true) {
+    protected function setCrashRate(int $crashRate): void
+    {
+        switch (true) {
             case $crashRate < 0:
                 $this->crashRate = 0;
                 break;
@@ -33,7 +34,8 @@ abstract class Mobile implements Racer
     }
 
     // Protection for ambiguous values etc.
-    protected function setSpeedLimits(int $minSpeed, int $maxSpeed): void {
+    protected function setSpeedLimits(int $minSpeed, int $maxSpeed): void
+    {
         if ($minSpeed < 1) $this->minSpeed = 1;
         else $this->minSpeed = $minSpeed;
 
