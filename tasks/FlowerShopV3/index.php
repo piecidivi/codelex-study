@@ -24,7 +24,7 @@ $shop->addSupplier(new HeheSupplier);
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Flower Shop</title>
-    <link href="<?php echo "public/styles.css"?>" rel="stylesheet">
+    <link href="<?php echo "public/styles.css" ?>" rel="stylesheet">
 </head>
 <body>
 <div>
@@ -39,11 +39,11 @@ $shop->addSupplier(new HeheSupplier);
         </thead>
         <tbody>
         <?php foreach ($shop->products()->all() as ['product' => $product, 'amount' => $amount]) { ?>
-        <tr>
-            <td><?php echo $product->sellable()->name(); ?></td>
-            <td><?php echo $product->price(); ?></td>
-            <td><?php echo $amount; ?></td>
-        </tr>
+            <tr>
+                <td><?php echo $product->sellable()->name(); ?></td>
+                <td><?php echo $product->price(); ?></td>
+                <td><?php echo $amount; ?></td>
+            </tr>
         <?php } ?>
         </tbody>
     </table>

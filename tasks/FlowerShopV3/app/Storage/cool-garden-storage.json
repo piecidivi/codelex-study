@@ -1,23 +1,23 @@
 [
-      {
-        "name": "Tulips Yellow",
-        "price": 10,
-        "amount": 200
-      },
-      {
-        "name": "Tulips Red",
-        "price": 12,
-        "amount": 300
-      },
-      {
-        "name": "Daisies",
-        "price": 5,
-        "amount": 375
-      },
-      {
-        "name": "Asters",
-        "price": 8,
-        "amount": 245
-      }
- ]
+  {
+    "name": "Tulips Yellow",
+    "price": 10,
+    "amount": 200
+  },
+  {
+    "name": "Tulips Red",
+    "price": 12,
+    "amount": 300
+  },
+  {
+    "name": "Daisies",
+    "price": 5,
+    "amount": 375
+  },
+  {
+    "name": "Asters",
+    "price": 8,
+    "amount": 245
+  }
+]
 

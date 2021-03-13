@@ -17,12 +17,10 @@ class Shop
     {
         $products = new ProductCollection();
 
-        foreach ($this->suppliers as $supplier)
-        {
+        foreach ($this->suppliers as $supplier) {
             $supplierProducts = $supplier->products()->all();
 
-            foreach ($supplierProducts as $barCode => ['product' => $product, 'amount' => $amount])
-            {
+            foreach ($supplierProducts as $barCode => ['product' => $product, 'amount' => $amount]) {
                 $products->add(
                     new Product(
                         $product->sellable(),

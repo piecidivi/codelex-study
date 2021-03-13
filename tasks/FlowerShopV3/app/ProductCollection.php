@@ -10,8 +10,7 @@ class ProductCollection
     {
         $barCode = $product->barCode();
 
-        if (isset($this->products[$barCode]))
-        {
+        if (isset($this->products[$barCode])) {
             $this->products[$barCode]['amount'] += $amount;
             return;
         }
