@@ -1,11 +1,12 @@
 <?php
 
+namespace App;
 
-class HustleTrade implements Trade
+class SillyTrade implements Trade
 {
     // Returns boolean to permit flower transfer
     public function pay(Shop $shop): bool
     {
-        return Game::guessNumber($shop);
+        return Game::rps($shop);
     }
 }

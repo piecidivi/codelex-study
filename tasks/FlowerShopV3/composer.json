@@ -1,0 +1,10 @@
+{
+    "name": "peter/flower-shop-v3",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}

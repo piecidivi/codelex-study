@@ -1,16 +1,11 @@
 <?php
 
+require_once "vendor/autoload.php";
 
-require_once "Flower.php";
-require_once "Warehouse.php";
-require_once "Shop.php";
-require_once "Trade.php";
-require_once "SillyTrade.php";
-require_once "RegularTrade.php";
-require_once "HustleTrade.php";
-require_once "Application.php";
-require_once "View.php";
-require_once "Game.php";
+use App\Application;
+use App\Warehouse;
+use App\View;
+use App\Shop;
 
 // Initialize app
 $app = new Application();
