@@ -1,6 +1,7 @@
 {
     "name": "peter/flower-shop-v3",
     "type": "project",
+    "description": "",
     "require": {},
     "autoload": {
         "psr-4": {
