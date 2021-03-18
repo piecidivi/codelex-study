@@ -15,6 +15,7 @@ class Product
         $this->price = $price;
     }
 
+    // This method is used, although it shows grey
     public function sellable(): Sellable
     {
         return $this->sellable;

@@ -11,13 +11,13 @@ class Flower implements Sellable
         $this->name = $name;
     }
 
-    public function name(): string
-    {
-        return $this->name;
-    }
-
     public function id(): string
     {
         return 'FLOWER_' . $this->name();
+    }
+
+    public function name(): string
+    {
+        return $this->name;
     }
 }

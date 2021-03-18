@@ -6,12 +6,10 @@ use App\Shop;
 use App\Suppliers\AmazingGardenSupplier;
 use App\Suppliers\CoolGardenSupplier;
 use App\Suppliers\HeheSupplier;
-use App\Suppliers\WoopWoopSupplier;
 
 $shop = new Shop();
 $shop->addSupplier(new AmazingGardenSupplier);
 $shop->addSupplier(new CoolGardenSupplier);
-$shop->addSupplier(new WoopWoopSupplier);
 $shop->addSupplier(new HeheSupplier);
 
 ?>
@@ -32,6 +30,7 @@ $shop->addSupplier(new HeheSupplier);
         <caption>Flower Shop</caption>
         <thead>
         <tr>
+            <th>ID</th>
             <th>Item</th>
             <th>Price</th>
             <th>Amount</th>
@@ -40,6 +39,7 @@ $shop->addSupplier(new HeheSupplier);
         <tbody>
         <?php foreach ($shop->products()->all() as ['product' => $product, 'amount' => $amount]) { ?>
             <tr>
+                <td><?php echo $product->sellable()->id(); ?></td>
                 <td><?php echo $product->sellable()->name(); ?></td>
                 <td><?php echo $product->price(); ?></td>
                 <td><?php echo $amount; ?></td>

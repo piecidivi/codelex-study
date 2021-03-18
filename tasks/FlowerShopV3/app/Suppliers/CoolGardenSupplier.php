@@ -14,7 +14,6 @@ class CoolGardenSupplier implements Supplier
     {
         $this->products = new ProductCollection;
         $this->readJson();
-
     }
 
     private function readJson(): void
