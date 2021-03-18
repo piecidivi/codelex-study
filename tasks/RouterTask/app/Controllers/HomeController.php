@@ -3,11 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\Word;
+use App\Models\ProdsAll;
 
 class HomeController
 {
     public function index(): void
     {
+        $prods = new ProdsAll();
+        $out = $prods->getProducts();
         $message = "Welcome to Router task index page.";
         require_once "app/Views/View.php";
     }

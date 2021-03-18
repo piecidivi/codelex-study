@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Router task page</title>
     <link rel="shortcut icon" href="../../public/favicon.ico">
+    <link href="<?php echo "public/styles.css" ?>" rel="stylesheet">
   </head>
   <body>
     <h1><?php echo $message; ?></h1>
@@ -19,5 +20,24 @@
     <form action="/testView" method="GET">
       <input type="submit" value="GET THERE">
     </form>
+    <table>
+      <caption>Flower Shop</caption>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($out as $product) { ?>
+          <tr>
+            <td><?php echo $product->getName(); ?></td>
+            <td><?php echo $product->getPrice(); ?></td>
+            <td><?php echo $product->getAmount(); ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
   </body>
 </html>
