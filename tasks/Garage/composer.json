@@ -1,0 +1,16 @@
+{
+    "name": "peter/garage",
+    "description": "Garage task",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Peteris Zarans"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
