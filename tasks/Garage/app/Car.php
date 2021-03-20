@@ -9,19 +9,22 @@ class Car implements \JsonSerializable
     private string $model;
     private int $consumption;
     private int $price;
+    private string $picture;
     private string $status;
+    const CAR_PICTURE_PATH = "images/";
     const CAR_AVAILABLE = "available";
     const CAR_RENTED = "rented";
     const CAR_BROKEN = "broken";
     const CAR_UNAVAILABLE = "unavailable";
 
-    public function __construct(int $id, string $make, string $model, int $consumption, int $price, string $status)
+    public function __construct(int $id, string $make, string $model, int $consumption, int $price, string $picture, string $status)
     {
         $this->id = $id;
         $this->make = $make;
         $this->model = $model;
         $this->consumption = $consumption;
         $this->price = $price;
+        $this->picture = $picture;
         $this->status = $status;
     }
 
@@ -48,6 +51,11 @@ class Car implements \JsonSerializable
     public function price(): int
     {
         return $this->price;
+    }
+
+    public function picture(): string
+    {
+        return $this->picture;
     }
 
     public function getStatus(): string

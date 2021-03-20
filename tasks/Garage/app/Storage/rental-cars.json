@@ -1,1 +1,74 @@
-[{"id":1,"make":"Toyota","model":"Aygo","consumption":44,"price":3615,"status":"available"},{"id":2,"make":"Skoda","model":"Fabia","consumption":40,"price":3727,"status":"available"},{"id":3,"make":"Volkswagen","model":"Golf","consumption":68,"price":4096,"status":"available"},{"id":4,"make":"Volkswagen","model":"Jetta","consumption":72,"price":5114,"status":"available"},{"id":5,"make":"Volkswagen","model":"Passat","consumption":75,"price":5732,"status":"available"},{"id":6,"make":"Kia","model":"Sportage","consumption":83,"price":5920,"status":"available"},{"id":7,"make":"Skoda","model":"Kodiaq","consumption":85,"price":6539,"status":"available"},{"id":8,"make":"Toyota","model":"Proace","consumption":102,"price":7789,"status":"available"}]
+[
+  {
+    "id": 1,
+    "make": "Toyota",
+    "model": "Aygo",
+    "consumption": 44,
+    "price": 3615,
+    "picture": "toyota_aygo.jpg",
+    "status": "available"
+  },
+  {
+    "id": 2,
+    "make": "Skoda",
+    "model": "Fabia",
+    "consumption": 40,
+    "price": 3727,
+    "picture": "skoda_fabia.jpg",
+    "status": "available"
+  },
+  {
+    "id": 3,
+    "make": "Volkswagen",
+    "model": "Golf",
+    "consumption": 68,
+    "price": 4096,
+    "picture": "vw_golf.jpg",
+    "status": "rented"
+  },
+  {
+    "id": 4,
+    "make": "Volkswagen",
+    "model": "Jetta",
+    "consumption": 72,
+    "price": 5114,
+    "picture": "vw_jetta.jpg",
+    "status": "rented"
+  },
+  {
+    "id": 5,
+    "make": "Volkswagen",
+    "model": "Passat",
+    "consumption": 75,
+    "price": 5732,
+    "picture": "vw_passat.jpg",
+    "status": "available"
+  },
+  {
+    "id": 6,
+    "make": "Kia",
+    "model": "Proceed",
+    "consumption": 83,
+    "price": 5920,
+    "picture": "kia_proceed.jpg",
+    "status": "rented"
+  },
+  {
+    "id": 7,
+    "make": "Skoda",
+    "model": "Superb",
+    "consumption": 85,
+    "price": 6539,
+    "picture": "skoda_superb.jpg",
+    "status": "available"
+  },
+  {
+    "id": 8,
+    "make": "Toyota",
+    "model": "Land Cruiser",
+    "consumption": 102,
+    "price": 7789,
+    "picture": "toyota_lc.jpg",
+    "status": "rented"
+  }
+]

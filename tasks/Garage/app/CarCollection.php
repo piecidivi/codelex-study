@@ -13,7 +13,7 @@ class CarCollection
 
         foreach ($cars as $car) {
             $this->cars[] = new Car($car->id, $car->make, $car->model,
-                $car->consumption, $car->price, $car->status);
+                $car->consumption, $car->price, $car->picture, $car->status);
         }
     }
 
