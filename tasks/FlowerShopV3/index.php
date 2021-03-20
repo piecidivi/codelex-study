@@ -6,6 +6,10 @@ use App\Shop;
 use App\Suppliers\AmazingGardenSupplier;
 use App\Suppliers\CoolGardenSupplier;
 use App\Suppliers\HeheSupplier;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $shop = new Shop();
 $shop->addSupplier(new AmazingGardenSupplier);

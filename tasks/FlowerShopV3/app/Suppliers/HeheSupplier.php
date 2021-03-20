@@ -19,11 +19,11 @@ class HeheSupplier implements Supplier
         $this->products = new ProductCollection;
 
         $this->database = new Medoo([
-            'database_type' => 'mysql',
-            'database_name' => Config::DB_NAME,
-            'server' => Config::DB_HOST,
-            'username' => Config::DB_USER,
-            'password' => Config::DB_PASSWORD
+            'database_type' => $_ENV["DB_TYPE"],
+            'database_name' => $_ENV["DB_NAME"],
+            'server' => $_ENV["DB_HOST"],
+            'username' => $_ENV["DB_USER"],
+            'password' => $_ENV["DB_PASSWORD"]
         ]);
         $this->addProducts();
     }
