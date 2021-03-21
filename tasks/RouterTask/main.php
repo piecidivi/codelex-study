@@ -1,10 +1,12 @@
 <?php
 
+require_once "vendor/autoload.php";
+
 use App\Models\ProdsAll;
 
-$prods = new ProdsAll();
-$out = $prods->getProducts();
+$products = new ProdsAll();
+$out = $products->getProducts();
 
 foreach ($out as $product) {
-    echo "{$product->getName()}, {$product->getPrice()}. {$product->getAmount()}\n";
+    echo "{$product->getName()}, {$product->getPrice()}, {$product->getAmount()}\n";
 }
