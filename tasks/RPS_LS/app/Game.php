@@ -40,7 +40,6 @@ class Game
 
     public function gameResult(Player $player1, Player $player2): string
     {
-
         if ($player1->choice() === $player2->choice()) {
             return "Game is a tie!";
         }
