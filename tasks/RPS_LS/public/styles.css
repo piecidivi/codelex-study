@@ -1,0 +1,48 @@
+p {
+    text-align: center;
+    font-family: 'Brush Script MIT', cursive;
+    font-size: xxx-large;
+    font-weight: bold;
+    color: #86713a;
+}
+
+p.regular {
+    font-size: xx-large;
+    margin-bottom: 0;
+}
+
+p.You {
+    color: #105d2d;
+    margin-top: 0;
+}
+
+p.Computer {
+    color: #ab0513;
+    margin-top: 0;
+}
+
+p.Game {
+    color: #56473a;
+    margin-top: 0;
+}
+
+form {
+    display: inline;
+}
+
+#section_forms {
+    text-align: center;
+}
+
+.input-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    filter: grayscale(100%) contrast(65%);
+    transition: filter 100ms linear;
+}
+
+.input-image:hover {
+    filter: grayscale(0%) contrast(100%);
+    transition: filter 200ms linear;
+}

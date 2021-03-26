@@ -1,0 +1,20 @@
+{
+    "name": "peter/rps_ls",
+    "description": "\"Rock Paper Scissors\" OOP style with Unit Tests",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Peteris Zarans",
+            "email": "peteris.zarans@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Tests\\": "tests/"
+        }
+    }
+}
