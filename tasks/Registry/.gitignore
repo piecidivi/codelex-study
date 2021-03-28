@@ -1,4 +1,0 @@
-vendor
-.env
-phpunit.xml
-.phpunit.result.cache
