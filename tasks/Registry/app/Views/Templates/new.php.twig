@@ -1,0 +1,68 @@
+{% extends "base.php.twig" %}
+{% block content %}
+    <h2 class="text-center mb-5">{{ formMessage|raw }}</h2>
+    {% if formLayout == "get" %}
+        <section class="flex justify-center">
+            <form action="/detail" method="post">
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="personal_code" name="personal_code" placeholder="Enter personal code..."
+                       pattern="[0-9-]{11,12}" maxlength="12" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="first_name" name="first_name" placeholder="Enter given name(s)..."
+                       pattern="[\p{L}\-\s]{1,}"
+                       maxlength="30" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="last_name" name="last_name" placeholder="Enter family name..."
+                       pattern="[\p{L}\-\s]+"
+                       maxlength="30" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="age" name="age" placeholder="Enter age..." pattern="[0-9]{1,3}"
+                       maxlength="3" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="address" name="address" placeholder="Enter address..."
+                       pattern='[\",.\d\/\p{L}\-\s]+'
+                       maxlength="255" size="40" required><br>
+                <textarea class="border-2 border-blue-700 rounded focus-within:outline-none p-1"
+                          id="description" name="description" placeholder="Describe a person..." rows="4"
+                          cols="38"></textarea><br><br>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="add">Add New Person
+                </button>
+            </form>
+        </section>
+    {% endif %}
+    {% if formLayout == "post" %}
+        <section class="flex justify-center">
+            <form action="/detail" method="post">
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="personal_code" name="personal_code" value="{{ personalCode }}"
+                       pattern="[0-9-]{11,12}" maxlength="12" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="first_name" name="first_name" value="{{ firstName }}"
+                       pattern="[\p{L}\-\s]{1,}" maxlength="30" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="last_name" name="last_name" value="{{ lastName }}" pattern="[\p{L}\-\s]{1,}"
+                       maxlength="30" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="age" name="age" value="{{ age }}" pattern="[0-9]{1,3}" maxlength="3" size="40"
+                       required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="address" name="address" value="{{ address }}" pattern='[\",.\d\/\p{L}\-\s]+'
+                       maxlength="255" size="40" required><br>
+                <textarea class="border-2 border-blue-700 rounded focus-within:outline-none p-1"
+                          id="description" name="description" rows="4"
+                          cols="38">{{ description }}</textarea><br><br>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="add">Add New Person
+                </button>
+            </form>
+        </section>
+    {% endif %}
+    <section class="flex justify-center">
+        <form action="/" method="get">
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                    type="submit" name="submit" value="cancel">Cancel
+            </button>
+        </form>
+    </section>
+{% endblock %}

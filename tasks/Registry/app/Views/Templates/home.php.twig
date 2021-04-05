@@ -1,0 +1,49 @@
+{% extends "base.php.twig" %}
+{% block content %}
+    <h2 class="text-center mb-5">{{ tableMessage|raw }}</h2>
+    <section class="text-center mb-5">
+        <form class="inline-block" action="/get" method="get">
+            <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1" type="text" name="search"
+                   placeholder="Search...">
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                    type="submit" name="submit">Search
+            </button>
+        </form>
+        <form class="inline-block" action="/add" method="get">
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                    type="submit" name="submit" value="add">Add New
+            </button>
+        </form>
+    </section>
+    {% if tableLayout == "data" %}
+        <section class="flex justify-center">
+            <form action="/getById" method="get">
+                <table class="table-fixed">
+                    <thead class="bg-green-500">
+                        <tr>
+                            <th class="border-2 border-blue-700 border-collapse py-2 px-5">Personal Code</th>
+                            <th class="border-2 border-blue-700 border-collapse py-2 px-5">Name</th>
+                            <th class="border-2 border-blue-700 border-collapse py-2 px-5">Age</th>
+                            <th class="border-2 border-blue-700 border-collapse py-2 px-5">Address</th>
+                            <th class="border-2 border-blue-700 border-collapse py-2 px-5"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-blue-200">
+                        {% for person in persons %}
+                            <tr>
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ person.personalCode }}</td>
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ person.firstName }} {{ person.lastName }}</td>
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ person.age }}</td>
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ person.address }}</td>
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5 hover:bg-blue-300">
+                                    <button type="submit" name="submit" value="{{ person.personalCode }}">Modify
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </section>
+    {% endif %}
+{% endblock %}
