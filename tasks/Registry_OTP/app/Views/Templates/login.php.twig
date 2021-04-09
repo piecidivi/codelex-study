@@ -1,0 +1,13 @@
+{% extends "base.php.twig" %}
+{% block content %}
+    <h2 class="text-center mb-5">{{ loginMessage|raw }}</h2>
+    <section class="text-center mb-5">
+    <form action="/access" method="get">
+        <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1" type="text" name="personalCode"
+               placeholder="Enter Your code..." pattern="[0-9-]+" size="40" required>
+        <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                type="submit">Get Access
+        </button>
+    </form>
+    </section>
+{% endblock %}

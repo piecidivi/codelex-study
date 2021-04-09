@@ -1,0 +1,73 @@
+{% extends "base.php.twig" %}
+{% block content %}
+    <h2 class="text-center mb-5">{{ formMessage|raw }}</h2>
+    {% if formLayout == "get" %}
+        <section class="flex justify-center">
+            <form action="/detail" method="post">
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="personal_code" name="personal_code" value="{{ person.personalCode }}"
+                       size="40" readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="first_name" name="first_name" value="{{ person.firstName }}"
+                       size="40" readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="last_name" name="last_name" value="{{ person.lastName }}" size="40" readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="age" name="age" value="{{ person.age }}" pattern="[0-9]{1,3}"
+                       maxlength="3" size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="address" name="address" value="{{ person.address }}"
+                       pattern='[\",.\d\/\p{L}\-\s]+' maxlength="255" size="40" required><br>
+                <textarea class="border-2 border-blue-700 rounded focus-within:outline-none p-1"
+                          id="description" name="description" rows="4"
+                          cols="38">{{ person.description }}</textarea><br><br>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="update">Edit
+                </button>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="delete">Delete
+                </button>
+            </form>
+        </section>
+    {% endif %}
+    {% if formLayout == "post" %}
+        <section class="flex justify-center">
+            <form action="/detail" method="post">
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="personal_code" name="personal_code" value="{{ personalCode }}" size="40"
+                       readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="first_name" name="first_name" value="{{ firstName }}" size="40" readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="last_name" name="last_name" value="<{{ lastName }}" size="40" readonly><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="age" name="age" value="{{ age }}" pattern="[0-9]{1,3}" maxlength="3"
+                       size="40" required><br>
+                <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="address" name="address" value="{{ address }}" pattern='[\",.\d\/\p{L}\-\s]+'
+                       maxlength="255" size="40" required><br>
+                <textarea class="border-2 border-blue-700 rounded focus-within:outline-none p-1"
+                          id="description" name="description" rows="4"
+                          cols="38">{{ description }}</textarea><br><br>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="update">Edit
+                </button>
+                <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                        type="submit" name="submit" value="delete">Delete
+                </button>
+            </form>
+        </section>
+    {% endif %}
+    <section class="flex justify-center">
+        <form class="inline-block" action="/home" method="get">
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                    type="submit" name="submit" value="cancel">Cancel
+            </button>
+        </form>
+        <form class="inline-block" action="/logout" method="get">
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-red-400 hover:bg-red-400 p-1 rounded"
+                    type="submit" name="submit" value="logout">Logout
+            </button>
+        </form>
+    </section>
+{% endblock %}
