@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>GRF</title>
+        <link rel="stylesheet" href="css/tailwind.css">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.ico">
+    </head>
+    <body class="bg-no-repeat bg-fixed bg-center bg-project-picture font-mono font-bold">
+    <h1 class="text-center text-5xl mt-10 mb-10">Get Rich Fast</h1>
+    <h2 id="tableMessage" class="text-center text-purple-800 text-2xl mb-5">{{ tableMessage|raw }}</h2>
+    {% if bankroll is defined %}
+    <p id="bankroll_id" hidden>{{ bankroll.id }}</p>
+    <p id="bankroll_name" class="text-center mb-5 text-2xl">{{ bankroll.name }} {{ "balance:" }}</p>
+    <p id="bankroll_balance" class="text-center mb-5 text-3xl">{{ (bankroll.bankroll / 100)|number_format(2, '.', '') }}</p>
+    {% endif %}
+    <section class="text-center mb-5">
+        <form id="lookup" class="inline-block" action="" method="get">
+            <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1" id="search" type="search" name="search"
+                   placeholder="Enter symbol..." required>
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+                    type="submit" name="submit">Search
+            </button>
+        </form>
+    </section>
+    <section class="flex justify-center">
+        <div id="purchase_table">
+            <div>{{ "&nbsp;"|raw }}</div>
+            <div>{{ "&nbsp;"|raw }}</div>
+            <div>{{ "&nbsp;"|raw }}</div>
+        </div>
+    </section>
+        <div>{{ "&nbsp;"|raw }}</div>
+        <div>{{ "&nbsp;"|raw }}</div>
+    {% if stock is defined %}
+    <section class="flex justify-center">
+            <table id="stock_table" class="table-fixed text-center">
+                <thead class="bg-green-500">
+                    <tr>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Symbol</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Shares in Stock</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Date Acquired</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Purchase Price One</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Purchase Price Total</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Quote Price</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Profit</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5"></th>
+                    </tr>
+                </thead>
+                <tbody id="stock_table_body" class="bg-blue-200">
+                    {% for share in stock %}
+                        <tr>
+                            <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.symbol }}</td>
+                            <td id="{{ "amount#{share.id}" }}" class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.amount }}</td>
+                            <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.purchaseDate }}</td>
+                            <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ (share.priceOne / 100)|number_format(2, '.', '') }}</td>
+                            <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ (share.priceTotal / 100)|number_format(2, '.', '') }}</td>
+                            <td id="{{ "quote#{share.id}" }}" class="border-2 bg-{{ share.profitState }}-400 border-blue-700 border-collapse py-2 px-5">{{ (share.quote / 100)|number_format(2, '.', '') }}</td>
+                            <td id="{{ "project#{share.id}" }}" class="border-2 bg-{{ share.profitState }}-400 border-blue-700 border-collapse py-2 px-5">{{ (share.project / 100)|number_format(2, '.', '') }}</td>
+                            {% if share.status == "open" %}
+                                <td class="border-2 border-blue-700 border-collapse py-2 px-5 hover:bg-red-300">
+                                    <button type="submit" name="sell" onclick="sellShare({{ share.id }})">SELL
+                                    </button>
+                                </td>
+                            {% endif %}
+                            {% if share.status == "closed" %}
+                                <td class="border-2 border-blue-700 border-collapse text-gray-400 py-2 px-5">SOLD</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    </section>
+    {% endif %}
+    <!-- JS: manage edit, delete, new patient -->
+    <script src="js/symbols.js"></script>
+    </body>
+</html>

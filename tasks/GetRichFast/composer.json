@@ -1,0 +1,31 @@
+{
+    "name": "peter/get-rich-fast",
+    "description": "Investment Tool Task",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Peteris Zarans",
+            "email": "peteris.zarans@gmail.com"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5",
+        "vlucas/phpdotenv": "^5.3",
+        "nikic/fast-route": "^1.3",
+        "catfan/medoo": "^1.7",
+        "league/container": "^3.3",
+        "finnhub/client": "^1.1",
+        "twig/twig": "^3.3",
+        "ext-pdo": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-http": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Tests\\": "tests/",
+            "Bootstrap\\": "bootstrap/"
+        }
+    }
+}
