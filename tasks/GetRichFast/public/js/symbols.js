@@ -143,9 +143,9 @@ function loadNewShare(share) {
         formatTwoDecimals(share.priceOne / 100) + '</td>';
     newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' +
         formatTwoDecimals(share.priceTotal / 100) + '</td>';
-    newShare += '<td id="quote' + share.id + '" class="border-2 bg-' + share.profitState + '-400 border-blue-700 border-collapse py-2 px-5">' +
+    newShare += '<td id="quote' + share.id + '" ' + progressColorClass(share.profitState) + '>' +
         formatTwoDecimals(share.quote / 100) + '</td>';
-    newShare += '<td id="project' + share.id + '" class="border-2 bg-' + share.profitState + '-400 border-blue-700 border-collapse py-2 px-5">' +
+    newShare += '<td id="project' + share.id + '" ' + progressColorClass(share.profitState) + '>' +
         formatTwoDecimals(share.project / 100) + '</td>';
 
     if (share.status === "open") {
@@ -159,6 +159,20 @@ function loadNewShare(share) {
 
     newShare += '</tr>';
     return newShare;
+}
+
+function progressColorClass(state) {
+    let cls = "";
+    switch (state) {
+        case "green":
+            cls = 'class="border-2 bg-green-400 border-blue-700 border-collapse py-2 px-5"';
+            break;
+        case "red":
+            cls = 'class="border-2 bg-red-400 border-blue-700 border-collapse py-2 px-5"';
+            break;
+        default: cls = 'class="border-2 bg-gray-400 border-blue-700 border-collapse py-2 px-5"';
+    }
+    return cls;
 }
 
 function total() {
