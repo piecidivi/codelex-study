@@ -1,5 +1,9 @@
 module.exports = {
-  purge: [],
+  purge: [
+    './public/**/*.css',
+    './public/**/*.twig',
+    './app/Views/Templates/*.twig'
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
