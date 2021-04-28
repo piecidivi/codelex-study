@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dinder</title>
+        <link rel="stylesheet" href="css/tailwind.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.ico">
+    </head>
+    <body class="bg-no-repeat bg-fixed bg-center bg-project-picture font-mono font-bold">
+        <p class="text-center text-2xl mt-5 mb-5">Dinder</p>
+        <section class="flex justify-center inline-block mb-5">
+            <a href="/home"
+               class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 rounded px-24 py-2 text-blue-500 text-2xl no-underline hover:bg-green-600 hover:text-white">Check
+                Photos</a>
+            {% if userName is defined %}
+                <a href="/profile"
+                   class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 rounded px-24 py-2 text-blue-500 text-2xl no-underline hover:bg-green-600 hover:text-white"><span
+                            class="text-yellow-900">{{ userName }}'s</span> Profile</a>
+            {% else %}
+                <a href="/profile"
+                   class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 rounded px-24 py-2 text-blue-500 text-2xl no-underline hover:bg-green-600 hover:text-white">Update
+                    Profile</a>
+            {% endif %}
+            <a href="/logout"
+               class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 rounded px-24 py-2 text-blue-500 text-2xl no-underline hover:bg-green-600 hover:text-yellow-400">Logout</a>
+        </section>
+        <p id="tableMessage"
+           class="text-center mb-5 text-2xl">{{ tableMessage is defined ? tableMessage|raw : "&nbsp;"|raw }}</p>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

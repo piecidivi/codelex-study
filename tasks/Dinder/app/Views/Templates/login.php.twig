@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Dinder</title>
+        <link rel="stylesheet" href="css/tailwind.css">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.ico">
+    </head>
+    <body class="bg-no-repeat bg-fixed bg-center bg-project-picture font-mono font-bold">
+        <h1 class="text-center text-5xl mt-10 mb-10">Dinder</h1>
+        <p id="tableMessage" class="text-center mb-5 text-2xl">{{ tableMessage|raw }}</p>
+        <section class="text-center mb-5">
+            <form id="login_form" class="inline-block" action="" method="post">
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="email" id="email" name="email" size="30" placeholder="Email..." required><br>
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="password" id="password" name="password" size="30"
+                       placeholder="Password...letters or numbers" minlength="8"
+                       maxlength="20" required><br>
+                <button class="inline-block border-2 border-blue-500 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                        type="submit" id="login" name="login">Sign In
+                </button>
+                <button class="border-2 border-blue-500 hover:border-blue-500 hover:bg-blue-300 p-1 px-3 text-2xl rounded mb-0.5"
+                        type="submit" id="signup" name="signup">Sign Up
+                </button>
+            </form>
+        </section>
+        <script src="js/login.js"></script>
+    </body>
+</html>

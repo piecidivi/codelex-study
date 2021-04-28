@@ -1,0 +1,159 @@
+{% extends "base.php.twig" %}
+{% block content %}
+    <section class="flex justify-center">
+        <form class="block" id="user_profile" action="/update" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="update_userid" name="id" value="{{ profile.id }}">
+            <input class="border-2 border-blue-500 text-gray-400 rounded focus-within:outline-none p-1 mb-0.5"
+                   type="text" id="email" name="email" value="{{ profile.email }}" size="40"
+                   readonly><br>
+            {% if profile.name == "***" %}
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="name" name="name" placeholder="Name..." size="40" pattern="[\p{L}\s]+" required>
+                <br>
+            {% else %}
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="text" id="name" name="name" value="{{ profile.name }}" size="40" pattern="[\p{L}\s]+"
+                       required><br>
+            {% endif %}
+            {% if profile.sex|length == 0 %}
+                <label for="sex">Sex:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="sex" name="sex" required>
+                    <option disabled selected value>--SELECT--</option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+            {% elseif profile.sex == "F" %}
+                <label for="sex">Sex:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="sex" name="sex" required>
+                    <option selected value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+            {% else %}
+                <label for="sex">Sex:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="sex" name="sex" required>
+                    <option selected value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            {% endif %}
+            {% if profile.preference|length == 0 %}
+                <label for="preference">Preference:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="preference" name="preference" required>
+                    <option disabled selected value>--SELECT--</option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                    <option value="A">All</option>
+                </select>
+            {% elseif profile.preference == "F" %}
+                <label for="preference">Preference:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="preference" name="preference" required>
+                    <option selected value="F">Female</option>
+                    <option value="M">Male</option>
+                    <option value="A">All</option>
+                </select>
+            {% elseif profile.preference == "M" %}
+                <label for="preference">Preference:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="preference" name="preference" required>
+                    <option selected value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="A">All</option>
+                </select>
+            {% else %}
+                <label for="preference">Preference:</label>
+                <select class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                        id="sex" name="sex" required>
+                    <option selected value="A">All</option>
+                    <option value="F">Female</option>
+                    <option value="M">Male</option>
+                </select>
+            {% endif %}
+            {% if profile.imagePath != "dummy.jpg" %}
+                <br><label for="edit_user_image">Select a file: </label>
+                <input type="file" id="edit_user_image" name="edit_user_image" onchange="showImage()"><br><br>
+                <section class="h-96">
+                    <img class="h-full max-h-96" id="edit_image" src="{{ profile.imagePath }}"
+                         alt="{{ profile.originalImageName }}">
+                </section>
+            {% else %}
+                <br><label for="edit_user_image">Select a file: </label>
+                <input type="file" id="edit_user_image" name="edit_user_image" onchange="showImage()" required><br><br>
+                <section class="h-96">
+                    <img class="h-full max-h-96" id="edit_image" src="" alt="">
+                </section>
+            {% endif %}
+            <button class="border-2 border-blue-500 border-opacity-0 hover:border-blue-500 hover:bg-blue-300 p-1 px-5 rounded text-black text-2xl"
+                    type="submit" id="update" name="update">update
+            </button>
+        </form>
+    </section>
+    <section class="flex justify-center">
+        <button class="border-2 border-blue-500 border-opacity-0 hover:border-blue-500 hover:bg-red-600 p-1 px-3 text-2xl rounded"
+                type="submit" id="delete" name="delete" onclick="deleteClick()">delete
+        </button>
+        <button class="border-2 border-blue-500 border-opacity-0 hover:border-blue-500 hover:bg-yellow-400 p-1 px-3 text-2xl rounded"
+                type="submit" id="password" name="password" onclick="passwordClick()">change password
+        </button>
+        <a href="/home">
+            <button class="border-2 border-blue-500 border-opacity-0 hover:border-blue-500 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                    type="button">cancel
+            </button>
+        </a>
+    </section>
+
+    <!-- MODAL PASSWORD -->
+    <section class="password-modal modal--hidden">
+        <div class="password-contents rounded">
+            <div class="password-close-bar">
+                <span onclick="spanXPassword()">X</span>
+            </div>
+            <form id="change_password" action="" method="post">
+                <input type="hidden" id="password_userid" name="id" value="{{ profile.id }}">
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="password" id="oldPassword" name="oldPassword" size="30" placeholder="Current password..."
+                       minlength="8"
+                       maxlength="20" required><br>
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="password" id="newPassword" name="newPassword" size="30" placeholder="New password..."
+                       minlength="8"
+                       maxlength="20" required><br>
+                <input class="border-2 border-blue-500 rounded focus-within:outline-none p-1 mb-0.5"
+                       type="password" id="confirmNewPassword" name="confirmNewPassword" size="30"
+                       placeholder="Confirm password..." minlength="8"
+                       maxlength="20" onkeyup="checkNewPassword()" required><br>
+                <button class="border-2 border-blue-500 border-opacity-0 focus-within:outline-none hover:border-blue-300 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                        type="submit" id="changePassword" name="changePassword">Submit
+                </button>
+                <button class="border-2 border-blue-500 border-opacity-0 focus-within:outline-none hover:border-blue-300 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                        type="button" onclick="cancelPassword()">Cancel
+                </button>
+                <p id="confirm_new_password_message" class="p-1 mb-0.5 text-red-700"></p>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- MODAL DELETE -->
+    <section class="delete-modal modal--hidden">
+        <div class="delete-contents rounded">
+            <div class="delete-close-bar">
+                <span onclick="spanXDelete()">X</span>
+            </div>
+            <p class="text-2xl text-red-700">Are You sure You want to delete account?</p>
+            <form id="delete_user" action="/delete" method="post">
+                <input type="hidden" id="delete_userid" name="id" value="{{ profile.id }}">
+                <button class="border-2 border-blue-500 border-opacity-0 focus-within:outline-none hover:border-blue-300 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                        type="submit" name="userDelete">Delete
+                </button>
+                <button class="border-2 border-blue-500 border-opacity-0 focus-within:outline-none hover:border-blue-300 hover:bg-blue-300 p-1 px-3 text-2xl rounded"
+                        type="button" onclick="cancelDelete()">Cancel
+                </button>
+            </form>
+        </div>
+    </section>
+    <script src="js/profile.js"></script>
+{% endblock %}
