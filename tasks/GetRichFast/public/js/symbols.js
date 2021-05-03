@@ -42,11 +42,11 @@ function yesMatch(data) {
     matchTable += '<tr><td id="buySymbol" class="border-2 border-blue-700 border-collapse py-2 px-5">' + data.symbol + '</td>';
     matchTable += '<td id="buyQuote" class="border-2 border-blue-700 border-collapse py-2 px-5">' + formatTwoDecimals(data.quote / 100) + '</td>';
     matchTable += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' +
-        '<input id="buyInput" onInput="total()" type="text" placeholder="Enter number..." pattern="[0-9]+" required></td>';
+        '<input class="focus-within:outline-none" id="buyInput" onInput="total()" type="text" placeholder="Enter number..." pattern="[0-9]+" required></td>';
     matchTable += '<td id="buyOutput" class="border-2 border-blue-700 border-collapse py-2 px-5 w-28">' +
         formatTwoDecimals(0) + '</td>';
     matchTable += '<td class="border-2 border-blue-700 border-collapse py-2 px-5 hover:bg-red-300">' +
-        '<button id="buyShare" type="submit" name="buy" onClick="buyShare()">BUY</button></td></tr></tbody>';
+        '<button class="focus-within:outline-none" id="buyShare" type="submit" name="buy" onClick="buyShare()">BUY</button></td></tr></tbody>';
     return matchTable;
 }
 
@@ -139,18 +139,19 @@ function loadNewShare(share) {
     newShare += '<td id="amount' + share.id + '" class="border-2 border-blue-700 border-collapse py-2 px-5">' +
         share.amount + '</td>';
     newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' + share.purchaseDate + '</td>';
+    newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' + share.sellDate + '</td>';
     newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' +
         formatTwoDecimals(share.priceOne / 100) + '</td>';
     newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5">' +
         formatTwoDecimals(share.priceTotal / 100) + '</td>';
-    newShare += '<td id="quote' + share.id + '" ' + progressColorClass(share.profitState) + '>' +
+    newShare += '<td id="quote' + share.id + '" class="border-2 bg-' + share.profitState + '-400 border-blue-700 border-collapse py-2 px-5">' +
         formatTwoDecimals(share.quote / 100) + '</td>';
-    newShare += '<td id="project' + share.id + '" ' + progressColorClass(share.profitState) + '>' +
+    newShare += '<td id="project' + share.id + '" class="border-2 bg-' + share.profitState + '-400 border-blue-700 border-collapse py-2 px-5">' +
         formatTwoDecimals(share.project / 100) + '</td>';
 
     if (share.status === "open") {
         newShare += '<td class="border-2 border-blue-700 border-collapse py-2 px-5 hover:bg-red-300">' +
-            '<button type="submit" name="sell" onclick="sellShare(' + share.id + ')">SELL</button></td>';
+            '<button class="focus-within:outline-none" type="submit" name="sell" onclick="sellShare(' + share.id + ')">SELL</button></td>';
     }
 
     if (share.status === "closed") {
@@ -159,20 +160,6 @@ function loadNewShare(share) {
 
     newShare += '</tr>';
     return newShare;
-}
-
-function progressColorClass(state) {
-    let cls = "";
-    switch (state) {
-        case "green":
-            cls = 'class="border-2 bg-green-400 border-blue-700 border-collapse py-2 px-5"';
-            break;
-        case "red":
-            cls = 'class="border-2 bg-red-400 border-blue-700 border-collapse py-2 px-5"';
-            break;
-        default: cls = 'class="border-2 bg-gray-400 border-blue-700 border-collapse py-2 px-5"';
-    }
-    return cls;
 }
 
 function total() {

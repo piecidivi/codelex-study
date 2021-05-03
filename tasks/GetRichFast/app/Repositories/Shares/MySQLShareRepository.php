@@ -22,7 +22,7 @@ class MySQLShareRepository extends MySQLAbstract implements ShareRepository
         foreach ($data as $record) {
             $shares->addShare(new Share(
                 $record["symbol"], $record["amount"], $record["priceOne"], $record["id"], $record["quote"],
-                $record["project"], $record["purchase_date"], $record["status"], $record["profitState"]
+                $record["project"], $record["purchase_date"], $record["sell_date"], $record["status"], $record["profitState"]
             ));
         }
 
@@ -47,7 +47,7 @@ class MySQLShareRepository extends MySQLAbstract implements ShareRepository
         }
         return new Share(
             $data[0]["symbol"], $data[0]["amount"], $data[0]["priceOne"], $data[0]["id"], $data[0]["quote"],
-            $data[0]["project"], $data[0]["purchase_date"], $data[0]["status"], $data[0]["profitState"]
+            $data[0]["project"], $data[0]["purchase_date"], $data[0]["sell_date"], $data[0]["status"], $data[0]["profitState"]
         );
     }
 

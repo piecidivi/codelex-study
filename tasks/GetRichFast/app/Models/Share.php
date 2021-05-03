@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use InvalidArgumentException;
 use JsonSerializable;
 
 class Share implements JsonSerializable
@@ -15,6 +14,7 @@ class Share implements JsonSerializable
     private int $quote;
     private int $project;
     private string $purchaseDate;
+    private string $sellDate;
     private string $status;
     private string $profitState;
 
@@ -35,6 +35,7 @@ class Share implements JsonSerializable
         int $quote = 0,
         int $project = 0,
         string $purchaseDate = "0",
+        string $sellDate = null,
         string $status = self::SHARE_STATUS_OPEN,
         string $profitState = self::PROFIT_EVEN
     )
@@ -49,6 +50,7 @@ class Share implements JsonSerializable
         $this->status = $status;
         $this->profitState = $profitState;
         $this->setPriceTotal();
+        $this->setSellDate($sellDate);
     }
 
     public function id(): int
@@ -101,6 +103,11 @@ class Share implements JsonSerializable
         return $this->purchaseDate;
     }
 
+    public function sellDate(): string
+    {
+        return $this->sellDate;
+    }
+
     public function buy(int $amount): void
     {
         $this->amount += $amount;
@@ -139,6 +146,13 @@ class Share implements JsonSerializable
     private function setPriceTotal(): void
     {
         $this->priceTotal = $this->priceOne * $this->amount;
+    }
+
+    private function setSellDate(string $sellDate = null): void
+    {
+        $this->sellDate = empty($sellDate) ? "" :
+            ($this->status === self::SHARE_STATUS_CLOSED ?
+                $this->sellDate = $sellDate : $this->sellDate = "");
     }
 
     public function jsonSerialize(): array

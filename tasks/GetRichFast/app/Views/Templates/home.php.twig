@@ -21,7 +21,7 @@
         <form id="lookup" class="inline-block" action="" method="get">
             <input class="border-2 border-blue-700 rounded focus-within:outline-none p-1" id="search" type="search" name="search"
                    placeholder="Enter symbol..." required>
-            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded"
+            <button class="border-2 border-blue-700 border-opacity-0 hover:border-blue-300 hover:bg-blue-300 p-1 rounded focus-within:outline-none"
                     type="submit" name="submit">Search
             </button>
         </form>
@@ -43,6 +43,7 @@
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Symbol</th>
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Shares in Stock</th>
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Date Acquired</th>
+                        <th class="border-2 border-blue-700 border-collapse py-2 px-5">Date Sold</th>
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Purchase Price One</th>
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Purchase Price Total</th>
                         <th class="border-2 border-blue-700 border-collapse py-2 px-5">Quote Price</th>
@@ -56,21 +57,14 @@
                             <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.symbol }}</td>
                             <td id="{{ "amount#{share.id}" }}" class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.amount }}</td>
                             <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.purchaseDate }}</td>
+                            <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ share.sellDate }}</td>
                             <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ (share.priceOne / 100)|number_format(2, '.', '') }}</td>
                             <td class="border-2 border-blue-700 border-collapse py-2 px-5">{{ (share.priceTotal / 100)|number_format(2, '.', '') }}</td>
-                            {% if share.profitState == "green" %}
-                            <td id="{{ "quote#{share.id}" }}" class="border-2 bg-green-400 border-blue-700 border-collapse py-2 px-5">{{ (share.quote / 100)|number_format(2, '.', '') }}</td>
-                            <td id="{{ "project#{share.id}" }}" class="border-2 bg-green-400 border-blue-700 border-collapse py-2 px-5">{{ (share.project / 100)|number_format(2, '.', '') }}</td>
-                            {% elseif share.profitState == "red" %}
-                            <td id="{{ "quote#{share.id}" }}" class="border-2 bg-red-400 border-blue-700 border-collapse py-2 px-5">{{ (share.quote / 100)|number_format(2, '.', '') }}</td>
-                            <td id="{{ "project#{share.id}" }}" class="border-2 bg-red-400 border-blue-700 border-collapse py-2 px-5">{{ (share.project / 100)|number_format(2, '.', '') }}</td>
-                            {% else %}
-                            <td id="{{ "quote#{share.id}" }}" class="border-2 bg-gray-400 border-blue-700 border-collapse py-2 px-5">{{ (share.quote / 100)|number_format(2, '.', '') }}</td>
-                            <td id="{{ "project#{share.id}" }}" class="border-2 bg-gray-400 border-blue-700 border-collapse py-2 px-5">{{ (share.project / 100)|number_format(2, '.', '') }}</td>
-                            {% endif %}
+                            <td id="{{ "quote#{share.id}" }}" class="border-2 bg-{{ share.profitState }}-400 border-blue-700 border-collapse py-2 px-5">{{ (share.quote / 100)|number_format(2, '.', '') }}</td>
+                            <td id="{{ "project#{share.id}" }}" class="border-2 bg-{{ share.profitState }}-400 border-blue-700 border-collapse py-2 px-5">{{ (share.project / 100)|number_format(2, '.', '') }}</td>
                             {% if share.status == "open" %}
                                 <td class="border-2 border-blue-700 border-collapse py-2 px-5 hover:bg-red-300">
-                                    <button type="submit" name="sell" onclick="sellShare({{ share.id }})">SELL
+                                    <button class="focus-within:outline-none" type="submit" name="sell" onclick="sellShare({{ share.id }})">SELL
                                     </button>
                                 </td>
                             {% endif %}

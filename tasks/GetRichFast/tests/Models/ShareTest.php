@@ -43,6 +43,12 @@ class ShareTest extends TestCase
         $this->assertEquals("0", $share->purchaseDate());
     }
 
+    public function testSellDate(): void
+    {
+        $share = new Share("AAPL", 10, 125, 1);
+        $this->assertEquals("", $share->sellDate());
+    }
+
     public function testProfitState(): void
     {
         $share = new Share("AAPL", 10, 125, 1);
