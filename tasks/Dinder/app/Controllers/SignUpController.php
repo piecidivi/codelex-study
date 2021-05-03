@@ -22,7 +22,7 @@ class SignUpController extends Controller
     public function signup(Request $request): void
     {
         try {
-            $this->storeUserService->store($request->get()["pemail"], $request->get()["ppassword"]);
+            $this->storeUserService->store($request->getInput()["pemail"], $request->getInput()["ppassword"]);
         } catch (Exception $exception) {
             $_SESSION["_flash"] = $exception->getMessage();
             header("Location: /");
@@ -30,7 +30,7 @@ class SignUpController extends Controller
         }
 
         try {
-            $user = $this->loginUserService->getByEmail($request->get()["pemail"], $request->get()["ppassword"]);
+            $user = $this->loginUserService->getByEmail($request->getInput()["pemail"], $request->getInput()["ppassword"]);
             $_SESSION["userid"] = $user->id();
         } catch (Exception $exception) {
             $_SESSION["_flash"] = $exception->getMessage();

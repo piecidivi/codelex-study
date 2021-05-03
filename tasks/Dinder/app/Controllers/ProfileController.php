@@ -68,10 +68,10 @@ class ProfileController extends Controller
     public function update(Request $request): void
     {
         // If new/refresh picture uploaded, save picture and data
-        if ($request->getImage()["error"] !== 4) {
+        if ($request->getFile()["error"] !== 4) {
 
             // 1. Get user to delete old picture
-            $pid = intval($request->get()["pid"]);
+            $pid = intval($request->getInput()["pid"]);
 
             try {
                 $profile = $this->getUserService->getById($pid);
@@ -83,7 +83,7 @@ class ProfileController extends Controller
 
             // 2. Save new picture and get symlink path to save to user
             try {
-                $symlinkPath = $this->imageUploadService->upload($request->getImage());
+                $symlinkPath = $this->imageUploadService->upload($request->getFile());
             } catch (NotWritableException $exception) {
                 $_SESSION["_flash"] = $exception->getMessage();
                 header("Location: /profile");
@@ -96,12 +96,12 @@ class ProfileController extends Controller
             // 4. Update user data along with new symlinkPath
             try {
                 $this->updateUserService
-                    ->updateAll(intval($request->get()["pid"]),
-                        $request->get()["pname"],
-                        $request->get()["psex"],
-                        $request->get()["ppreference"],
+                    ->updateAll(intval($request->getInput()["pid"]),
+                        $request->getInput()["pname"],
+                        $request->getInput()["psex"],
+                        $request->getInput()["ppreference"],
                         $symlinkPath,
-                        $request->getImage()["name"]
+                        $request->getFile()["name"]
                     );
             } catch (Exception $exception) {
                 $_SESSION["_flash"] = $exception->getMessage();
@@ -113,10 +113,10 @@ class ProfileController extends Controller
         } else {
             try {
                 $this->updateUserService
-                    ->update(intval($request->get()["pid"]),
-                        $request->get()["pname"],
-                        $request->get()["psex"],
-                        $request->get()["ppreference"]
+                    ->update(intval($request->getInput()["pid"]),
+                        $request->getInput()["pname"],
+                        $request->getInput()["psex"],
+                        $request->getInput()["ppreference"]
                     );
             } catch (Exception $exception) {
                 $_SESSION["_flash"] = $exception->getMessage();
@@ -131,7 +131,7 @@ class ProfileController extends Controller
 
     public function password(Request $request): void
     {
-        $pid = intval($request->get()["pid"]);
+        $pid = intval($request->getInput()["pid"]);
         try {
             $profile = $this->getUserService->getById($pid);
         } catch (Exception $exception) {
@@ -139,8 +139,8 @@ class ProfileController extends Controller
             header("Location: /profile");
             exit();
         }
-        $oldPassword = $request->get()["poldPassword"];
-        $newPassword = $request->get()["pnewPassword"];
+        $oldPassword = $request->getInput()["poldPassword"];
+        $newPassword = $request->getInput()["pnewPassword"];
 
         try {
             $this->changePasswordService->changeUserPassword($profile, $oldPassword, $newPassword);
@@ -173,7 +173,7 @@ class ProfileController extends Controller
         }
 
         // Delete user
-        $pid = intval($request->get()["pid"]);
+        $pid = intval($request->getInput()["pid"]);
         try {
             $this->deleteUserService->deleteUser($pid);
         } catch (InvalidArgumentException $exception) {

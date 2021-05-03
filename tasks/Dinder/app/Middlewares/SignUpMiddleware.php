@@ -29,13 +29,13 @@ class SignUpMiddleware implements MiddlewareInterface
                     "max" => "20"
                 ],
                 "match" => [
-                    "password" => $request->get()["ppassword"]
+                    "password" => $request->getInput()["ppassword"]
                 ]
             ]
         ];
 
         try {
-            $inputValidator->validate($request->get(), $required, $rules);
+            $inputValidator->validate($request->getInput(), $required, $rules);
         } catch (InvalidArgumentException $exception) {
             $_SESSION["_flash"] = $exception->getMessage();
             header("Location: /");

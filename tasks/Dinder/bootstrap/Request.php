@@ -7,17 +7,17 @@ class Request
     private array $request = [];
     private array $image = [];
 
-    public function get(): array
+    public function getInput(): array
     {
         return $this->request;
     }
 
-    public function getImage(): array
+    public function getFile(): array
     {
         return $this->image;
     }
 
-    public function fill(array $request, string $keyPrefix): void
+    public function fillInput(array $request, string $keyPrefix): void
     {
         foreach ($request as $key => $element) {
             $storeKey = $keyPrefix . $key;
@@ -25,7 +25,7 @@ class Request
         }
     }
 
-    public function load(array $image): void
+    public function uploadFile(array $image): void
     {
         foreach ($image as $img) {
             foreach ($img as $key => $element) {

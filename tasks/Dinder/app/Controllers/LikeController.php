@@ -33,7 +33,7 @@ class LikeController extends Controller
     {
         $userid = intval($_SESSION["userid"]);
         $checkedId = intval($_SESSION["checkedId"]);
-        $like = $request->get()["poption"];
+        $like = $request->getInput()["poption"];
 
         // Save activity
         try {

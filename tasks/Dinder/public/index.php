@@ -157,15 +157,15 @@ $vars = $routeInfo[2];
 
 $request = new Request();
 if (isset($_GET)) {
-    $request->fill($_GET, "g");
+    $request->fillInput($_GET, "g");
 }
 
 if (isset($_POST)) {
-    $request->fill($_POST, "p");
+    $request->fillInput($_POST, "p");
 }
 
 if (isset($_FILES)) {
-    $request->load($_FILES);
+    $request->uploadFile($_FILES);
 }
 
 $middlewareKey = "{$controller}@{$method}";

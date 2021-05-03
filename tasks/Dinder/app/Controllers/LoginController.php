@@ -31,7 +31,7 @@ class LoginController extends Controller
     public function login(Request $request): void
     {
         try {
-            $user = $this->loginUserService->getByEmail($request->get()["pemail"], $request->get()["ppassword"]);
+            $user = $this->loginUserService->getByEmail($request->getInput()["pemail"], $request->getInput()["ppassword"]);
             $_SESSION["userid"] = $user->id();
             $_SESSION["user_name"] = $user->name();
         } catch (Exception $exception) {

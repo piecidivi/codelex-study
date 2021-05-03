@@ -23,7 +23,7 @@ class RatingSaveMiddleware implements MiddlewareInterface
         ];
 
         try {
-            $inputValidator->validate($request->get(), $required, $rules);
+            $inputValidator->validate($request->getInput(), $required, $rules);
         } catch (InvalidArgumentException $exception) {
             $_SESSION["_flash"] = $exception->getMessage();
             header("Location: /home");

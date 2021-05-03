@@ -34,7 +34,7 @@ class UpdateProfileMiddleware implements MiddlewareInterface
         ];
 
         try {
-            $inputValidator->validate($request->get(), $required, $rules);
+            $inputValidator->validate($request->getInput(), $required, $rules);
         } catch (InvalidArgumentException $exception) {
             $_SESSION["_flash"] = $exception->getMessage();
             header("Location: /profile");
@@ -42,10 +42,10 @@ class UpdateProfileMiddleware implements MiddlewareInterface
         }
 
         // Handle file upload
-        if ($request->getImage()["error"] !== 4) {
+        if ($request->getFile()["error"] !== 4) {
             $fileValidator = new FileValidator();
             try {
-                $fileValidator->validate($request->getImage());
+                $fileValidator->validate($request->getFile());
             } catch (Exception $exception) {
                 $_SESSION["_flash"] = $exception->getMessage();
                 header("Location: /profile");
